@@ -263,6 +263,15 @@ function Dashboard() {
   const periodHours = { Week: '12', Month: '34', 'All time': '164' }[period];
   const periodDelta = { Week: '+3 vs last week', Month: '+11 vs last month', 'All time': '+164 lifetime' }[period];
 
+  if (tab === 'My Course') {
+    return (
+      <div style={{ width:'100%', height:'100%', position:'relative' }}>
+        <MyCourse/>
+        <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
+      </div>
+    );
+  }
+
   return (
     <div style={{
       width:'100%', height:'100%', background: t.bg, color: t.ink,
@@ -468,41 +477,48 @@ function Dashboard() {
       </div>
 
       {/* Floating bottom tab bar */}
-      <div style={{
-        position:'absolute', left: 16, right: 16, bottom: 22,
-        background: isDark ? 'rgba(20,20,24,0.92)' : 'rgba(255,255,255,0.96)',
-        backdropFilter:'blur(20px) saturate(180%)',
-        WebkitBackdropFilter:'blur(20px) saturate(180%)',
-        border: '1px solid #E9EAEB',
-        borderRadius: 22,
-        boxShadow: '0 8px 24px rgba(16,24,40,0.10), 0 2px 6px rgba(16,24,40,0.06)',
-        padding: '8px 6px',
-      }}>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
-          {[
-            { k:'Dashboard', icon: I.home },
-            { k:'Upskill',   icon: I.book },
-            { k:'Journey',   icon: I.path },
-            { k:'Assess',    icon: I.check2 },
-          ].map(it => {
-            const active = it.k === tab;
-            return (
-              <button key={it.k} onClick={() => setTab(it.k)} style={{
-                display:'flex', flexDirection:'column', alignItems:'center', gap: 3,
-                background:'transparent', border:'none', cursor:'pointer',
-                padding:'4px 0',
-                color: active ? accent : t.muted,
-              }}>
-                {it.icon(active ? accent : t.muted, active ? ACCENTS[tweaks.accent].soft : 'none')}
-                <span style={{ fontSize:10.5, fontWeight: active ? 550 : 450, letterSpacing:'-0.005em' }}>{it.k}</span>
-                <span style={{
-                  width: active ? 14 : 0, height: 2, borderRadius: 1, background: accent,
-                  transition: 'width .2s', marginTop: -1,
-                }}/>
-              </button>
-            );
-          })}
-        </div>
+      <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
+    </div>
+  );
+}
+
+// Bottom tab bar — shared between Dashboard and other in-app tabs (My Course, etc.)
+function DashboardTabBar({ tab, setTab, t, accent, tweaks, isDark }) {
+  return (
+    <div style={{
+      position:'absolute', left: 16, right: 16, bottom: 22, zIndex: 30,
+      background: isDark ? 'rgba(20,20,24,0.92)' : 'rgba(255,255,255,0.96)',
+      backdropFilter:'blur(20px) saturate(180%)',
+      WebkitBackdropFilter:'blur(20px) saturate(180%)',
+      border: '1px solid #E9EAEB',
+      borderRadius: 22,
+      boxShadow: '0 8px 24px rgba(16,24,40,0.10), 0 2px 6px rgba(16,24,40,0.06)',
+      padding: '8px 6px',
+    }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
+        {[
+          { k:'Dashboard', icon: I.home },
+          { k:'My Course', icon: I.book },
+          { k:'Journey',   icon: I.path },
+          { k:'Assess',    icon: I.check2 },
+        ].map(it => {
+          const active = it.k === tab;
+          return (
+            <button key={it.k} onClick={() => setTab(it.k)} style={{
+              display:'flex', flexDirection:'column', alignItems:'center', gap: 3,
+              background:'transparent', border:'none', cursor:'pointer',
+              padding:'4px 0',
+              color: active ? accent : t.muted,
+            }}>
+              {it.icon(active ? accent : t.muted, active ? ACCENTS[tweaks.accent].soft : 'none')}
+              <span style={{ fontSize:10.5, fontWeight: active ? 550 : 450, letterSpacing:'-0.005em' }}>{it.k}</span>
+              <span style={{
+                width: active ? 14 : 0, height: 2, borderRadius: 1, background: accent,
+                transition: 'width .2s', marginTop: -1,
+              }}/>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -523,7 +539,7 @@ function App() {
         fontFamily:'"Poppins", system-ui',
         padding:'40px 20px',
       }}>
-        <IOSDevice width={402} height={874} dark={tweaks.theme === 'dark'}>
+        <IOSDevice width={402} height={874} dark={!authed || tweaks.theme === 'dark'}>
           {authed
             ? <Dashboard/>
             : <Login onSuccess={() => setAuthed(true)}/>}
