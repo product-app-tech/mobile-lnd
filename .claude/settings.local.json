@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "Bash(node -e ' *)",
+      "Bash(grep -n \"gridTemplateColumns:'repeat\\(4,1fr\\)'\\\\|{ k:'Dashboard'\\\\|{ k:'Assess'\" /Users/ridho/Documents/Workspace/Mobile-LnD/app.jsx)"
     ]
   }
 }
