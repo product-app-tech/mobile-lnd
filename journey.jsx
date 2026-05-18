@@ -364,8 +364,8 @@ function JnStat({ icon, iconBg, label, value }) {
         display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
       }}>{icon}</div>
       <div style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ fontSize: 15, fontWeight: 600, color: JN_INK, lineHeight:'18px' }}>{value}</div>
-        <div style={{ fontSize: 10.5, color: JN_MUTED, lineHeight:'14px' }}>{label}</div>
+        <div style={{ fontSize: 17, fontWeight: 600, color: JN_INK, lineHeight:'20px', letterSpacing:'-0.01em' }}>{value}</div>
+        <div style={{ fontSize: 10.5, color: JN_MUTED, lineHeight:'13px' }}>{label}</div>
       </div>
     </div>
   );

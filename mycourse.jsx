@@ -159,17 +159,17 @@ function McCourseCard({ course, footer, badge }) {
       display:'flex', flexDirection:'column',
       boxShadow:'0 1px 2px rgba(16, 24, 40, 0.04)',
     }}>
-      <div style={{ position:'relative', width:'100%', height: 120, background:'#F5F5F5' }}>
+      <div style={{ position:'relative', width:'100%', height: 160, background:'#F5F5F5' }}>
         <img src={course.image} alt={course.title}
           onError={e => { e.currentTarget.style.display='none'; }}
           style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+        {badge && (
+          <div style={{ position:'absolute', top: 10, left: 10 }}>{badge}</div>
+        )}
         {course.source && (
           <div style={{ position:'absolute', top: 10, right: 10 }}>
             <McSourceBadge source={course.source}/>
           </div>
-        )}
-        {badge && (
-          <div style={{ position:'absolute', top: 10, left: 10 }}>{badge}</div>
         )}
       </div>
       <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
@@ -508,9 +508,13 @@ function MyCourse() {
         {selected ? (
           <McCourseDetails courseId={selected} onBack={closeDetails}/>
         ) : (
-          <>
+          <div style={{
+            background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12,
+            padding: 14,
+            display:'flex', flexDirection:'column', gap: 14,
+          }}>
             {/* Page title */}
-            <div style={{ display:'flex', alignItems:'flex-start', gap: 10, marginTop: 4 }}>
+            <div style={{ display:'flex', alignItems:'flex-start', gap: 10 }}>
               <div style={{
                 width: 40, height: 40, borderRadius: 10, background:'#FFF',
                 border:`1px solid ${MC_LINE}`,
@@ -550,12 +554,10 @@ function MyCourse() {
               overflowX:'auto', scrollSnapType:'x mandatory',
               paddingBottom: 4,
               scrollbarWidth:'none', msOverflowStyle:'none',
-              marginLeft: -18, marginRight: -18,
-              paddingLeft: 18, paddingRight: 18,
             }}>
               <McCourseList tab={tab} onDetails={openDetails}/>
             </div>
-          </>
+          </div>
         )}
 
       </div>
