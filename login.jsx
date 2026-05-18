@@ -252,13 +252,18 @@ function Login({ onSuccess }) {
               onMouseEnter={e => e.currentTarget.style.background = PRIMARY_HOVER}
               onMouseLeave={e => e.currentTarget.style.background = PRIMARY}
             >Login</button>
-
-            <p style={{ margin:0, fontSize: 12, lineHeight:'16px', color: MUTED, userSelect:'none', position:'relative', zIndex: 2 }}>
-              ©2026 LearnXpert LnD
-            </p>
           </div>
         </div>
       </div>
+
+      <p style={{
+        margin:0, padding:'0 24px',
+        textAlign:'center',
+        fontSize: 12, lineHeight:'16px', color: MUTED,
+        userSelect:'none', position:'relative', zIndex: 2,
+      }}>
+        ©2026 LearnXpert LnD
+      </p>
     </div>
   );
 }
