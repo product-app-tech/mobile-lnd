@@ -2524,6 +2524,7 @@ function Dashboard({ onLogout }) {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [period, setPeriod] = React.useState('Week');
   const [tab, setTab] = React.useState('Dashboard');
+  const [hoursOpen, setHoursOpen] = React.useState(false);
 
   const t = THEMES[tweaks.theme] || THEMES.light;
   const accent = ACCENTS[tweaks.accent].hex;
@@ -2612,56 +2613,80 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
 
-        {/* Hero stat — Learning hours */}
-        <Card t={t} pad={dense ? 14 : 18}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: 12 }}>
-            <div>
-              <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
-              <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Time invested · {period.toLowerCase()}</div>
-            </div>
-            {tweaks.showSparkline && (
-              <Sparkline data={[6,8,5,9,7,11,12]} color={accent}/>
-            )}
+        {/* Continue Learning — primary action hero */}
+        <Card t={t} pad={dense ? 12 : 14}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 10 }}>
+            <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em' }}>Continue learning</div>
+            <span style={{ fontSize:11.5, color: accent, fontWeight:500 }}>View all →</span>
           </div>
-          <div style={{ display:'flex', alignItems:'baseline', gap: 6 }}>
+          <div style={{ display:'flex', gap: 12, alignItems:'flex-start' }}>
             <div style={{
-              fontFamily:'"Poppins", system-ui', fontWeight:500, fontSize:46,
-              letterSpacing:'-0.04em', color: t.ink, lineHeight:1,
-              fontVariantNumeric:'tabular-nums',
-            }}>{periodHours}</div>
-            <div style={{ fontSize:18, color: t.muted, fontWeight:400, letterSpacing:'-0.02em' }}>hrs</div>
-            <div style={{
-              marginLeft:'auto', display:'inline-flex', alignItems:'center', gap:3,
-              fontSize:12, fontFamily:'"JetBrains Mono", ui-monospace', color: t.success,
-              fontVariantNumeric:'tabular-nums',
+              width: 64, height: 64, borderRadius: 10, flexShrink: 0, overflow:'hidden',
+              background: `repeating-linear-gradient(135deg, ${t.chip} 0 6px, ${t.surface} 6px 12px)`,
+              border: `1px solid ${t.line}`,
+              display:'flex', alignItems:'center', justifyContent:'center',
             }}>
-              {I.arrow(t.success)}
-              <span>{periodDelta}</span>
+              <span style={{
+                fontFamily:'"JetBrains Mono", ui-monospace', fontSize:8, color: t.muted,
+                letterSpacing:'0.04em',
+              }}>COVER</span>
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:8 }}>
+                <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Digital Marketing Essentials</div>
+                <div style={{ fontSize:12, color: t.ink, fontFamily:'"JetBrains Mono", ui-monospace', fontWeight:500, fontVariantNumeric:'tabular-nums' }}>45%</div>
+              </div>
+              <div style={{ display:'flex', alignItems:'center', gap:6, marginTop: 3, fontSize:11, color: t.muted }}>
+                <span>Module 4 of 9</span>
+                {I.dot(t.faint)}
+                <span>1h 40m left</span>
+              </div>
+              <div style={{
+                marginTop: 8, height: 5, borderRadius: 3, background: t.chip,
+                overflow:'hidden', position:'relative',
+              }}>
+                <div style={{
+                  position:'absolute', inset:0, width:'45%',
+                  background: accent, borderRadius: 3,
+                }}/>
+              </div>
             </div>
           </div>
-          {/* Mini distribution bar */}
-          <div style={{ display:'flex', height: 4, borderRadius: 2, overflow:'hidden', marginTop: 14, gap: 2 }}>
-            {[40,28,22,10].map((w,i) => (
-              <div key={i} style={{
-                width:`${w}%`,
-                background: i === 0 ? accent : i === 1 ? `color-mix(in oklch, ${accent} 50%, transparent)`
-                          : i === 2 ? `color-mix(in oklch, ${accent} 25%, transparent)` : t.chip,
-              }}/>
-            ))}
-          </div>
-          <div style={{ display:'flex', justifyContent:'space-between', marginTop: 8, fontSize: 10.5, color: t.faint, fontFamily:'"JetBrains Mono", ui-monospace' }}>
-            <span>Video 40%</span><span>Reading 28%</span><span>Quiz 22%</span><span>Other</span>
-          </div>
+          <button style={{
+            marginTop: 12, width:'100%', height: 40, borderRadius: 10,
+            border:'none', background: accent, color:'#FFF',
+            fontFamily:'inherit', fontWeight: 550, fontSize: 13.5,
+            letterSpacing:'-0.005em', cursor:'pointer',
+            display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+          }}>
+            Continue
+            {I.arrow('#FFF')}
+          </button>
         </Card>
 
-        {/* KPI strip — 3 even tiles */}
+        {/* KPI strip — 3 even tiles with icon */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 10 }}>
           {[
-            { k:'9 / 12', l:'Courses', sub:'completed' },
-            { k:'82%',    l:'Avg quiz', sub:'last 30 days' },
-            { k:'Normal', l:'Velocity', sub:'on track' },
+            { k:'9 / 12', l:'Courses', sub:'completed', icon: (c) => (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 7v14"/>
+                <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+              </svg>
+            )},
+            { k:'82%',    l:'Avg quiz', sub:'last 30 days', icon: (c) => (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            )},
+            { k:'Normal', l:'Velocity', sub:'on track', icon: (c) => (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            )},
           ].map((kpi, i) => (
             <Card t={t} pad={12} key={i} style={{ display:'flex', flexDirection:'column', gap: 3 }}>
+              <div style={{ marginBottom: 2 }}>{kpi.icon(accent)}</div>
               <div style={{
                 fontSize: kpi.k === 'Normal' ? 17 : 22,
                 fontWeight: 550, letterSpacing:'-0.025em', color: t.ink,
@@ -2674,36 +2699,100 @@ function Dashboard({ onLogout }) {
           ))}
         </div>
 
-        {/* Quick Actions */}
-        <Card t={t} pad={dense ? 14 : 16}>
+        {/* Learning hours — secondary, collapsible */}
+        <Card t={t} pad={dense ? 12 : 14}>
+          <button onClick={() => setHoursOpen(o => !o)} style={{
+            width:'100%', background:'transparent', border:'none', padding: 0,
+            cursor:'pointer', textAlign:'left', fontFamily:'inherit',
+            display:'flex', justifyContent:'space-between', alignItems:'center',
+          }}>
+            <div style={{ display:'flex', alignItems:'baseline', gap: 8 }}>
+              <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
+              <div style={{
+                fontSize:13, color: t.ink, fontFamily:'"JetBrains Mono", ui-monospace',
+                fontWeight: 500, fontVariantNumeric:'tabular-nums',
+              }}>{periodHours} hrs</div>
+            </div>
+            <div style={{ display:'flex', alignItems:'center', gap: 8 }}>
+              <span style={{
+                display:'inline-flex', alignItems:'center', gap:3,
+                fontSize:11, fontFamily:'"JetBrains Mono", ui-monospace', color: t.success,
+                fontVariantNumeric:'tabular-nums',
+              }}>
+                {I.arrow(t.success)}
+                <span>{periodDelta}</span>
+              </span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={t.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{
+                transform: hoursOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition:'transform .15s',
+              }}>
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+          </button>
+
+          {hoursOpen && (
+            <div style={{ marginTop: 14 }}>
+              {tweaks.showSparkline && (
+                <div style={{ display:'flex', justifyContent:'flex-end', marginBottom: 8 }}>
+                  <Sparkline data={[6,8,5,9,7,11,12]} color={accent}/>
+                </div>
+              )}
+              <div style={{ display:'flex', alignItems:'baseline', gap: 6 }}>
+                <div style={{
+                  fontFamily:'"Poppins", system-ui', fontWeight:500, fontSize:46,
+                  letterSpacing:'-0.04em', color: t.ink, lineHeight:1,
+                  fontVariantNumeric:'tabular-nums',
+                }}>{periodHours}</div>
+                <div style={{ fontSize:18, color: t.muted, fontWeight:400, letterSpacing:'-0.02em' }}>hrs</div>
+                <div style={{ fontSize:11.5, color: t.muted, marginLeft:'auto' }}>Time invested · {period.toLowerCase()}</div>
+              </div>
+              {/* Mini distribution bar */}
+              <div style={{ display:'flex', height: 4, borderRadius: 2, overflow:'hidden', marginTop: 14, gap: 2 }}>
+                {[40,28,22,10].map((w,i) => (
+                  <div key={i} style={{
+                    width:`${w}%`,
+                    background: i === 0 ? accent : i === 1 ? `color-mix(in oklch, ${accent} 50%, transparent)`
+                              : i === 2 ? `color-mix(in oklch, ${accent} 25%, transparent)` : t.chip,
+                  }}/>
+                ))}
+              </div>
+              <div style={{ display:'flex', justifyContent:'space-between', marginTop: 8, fontSize: 10.5, color: t.faint, fontFamily:'"JetBrains Mono", ui-monospace' }}>
+                <span>Video 40%</span><span>Reading 28%</span><span>Quiz 22%</span><span>Other</span>
+              </div>
+            </div>
+          )}
+        </Card>
+
+        {/* Quick Actions — compact */}
+        <Card t={t} pad={dense ? 12 : 14}>
           <div style={{
-            fontSize: 15, fontWeight: 700, letterSpacing:'-0.015em',
-            color: t.ink, marginBottom: 12,
+            fontSize: 14, fontWeight: 550, letterSpacing:'-0.015em',
+            color: t.ink, marginBottom: 10,
           }}>Quick Actions</div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap: 10 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap: 8 }}>
             {[
               { l:'Browse Courses', bg:'#F5F3FF', bd:'#D8D4FC', fg:'#7C3AED', svg: (color) => (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 7v14"/>
                   <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
                 </svg>
               ) },
               { l:'My Schedule', bg:'#EFF8FF', bd:'#B2DDFF', fg:'#1570EF', svg: (color) => (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M8 2v4"/><path d="M16 2v4"/>
                   <rect width="18" height="18" x="3" y="4" rx="2"/>
                   <path d="M3 10h18"/>
                 </svg>
               ) },
               { l:'Submit Work', bg:'#ECFDF3', bd:'#A6F4C5', fg:'#059669', svg: (color) => (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
                   <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
               ) },
               { l:'Get Help', bg:'#FFF7ED', bd:'#FDBA74', fg:'#EA580C', svg: (color) => (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"/>
                   <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                   <path d="M12 17h.01"/>
@@ -2711,16 +2800,16 @@ function Dashboard({ onLogout }) {
               ) },
             ].map((qa, i) => (
               <button key={i} style={{
-                display:'flex', flexDirection:'column', alignItems:'flex-start', gap: 10,
-                padding: 14, borderRadius: 10, border: `1px solid ${t.line2}`,
+                display:'flex', flexDirection:'row', alignItems:'center', gap: 10,
+                padding:'10px 12px', borderRadius: 10, border: `1px solid ${t.line2}`,
                 background: t.surface, cursor:'pointer', textAlign:'left',
               }}>
                 <div style={{
-                  width: 34, height: 34, borderRadius: 8,
+                  width: 28, height: 28, borderRadius: 7,
                   background: qa.bg, border: `1px solid ${qa.bd}`,
-                  display:'flex', alignItems:'center', justifyContent:'center',
+                  display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
                 }}>{qa.svg(qa.fg)}</div>
-                <span style={{ fontSize: 13, color: t.ink, fontWeight: 500, letterSpacing:'-0.005em' }}>{qa.l}</span>
+                <span style={{ fontSize: 12.5, color: t.ink, fontWeight: 500, letterSpacing:'-0.005em' }}>{qa.l}</span>
               </button>
             ))}
           </div>
@@ -2745,41 +2834,6 @@ function Dashboard({ onLogout }) {
             </div>
           </div>
           <PerfChart t={t} accent={accent}/>
-        </Card>
-
-        {/* Continue learning */}
-        <Card t={t} pad={dense ? 12 : 14}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 10 }}>
-            <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em' }}>Ongoing course</div>
-            <span style={{ fontSize:11.5, color: accent, fontWeight:500 }}>View all →</span>
-          </div>
-          <ImagePlaceholder t={t} accent={accent} label="COURSE THUMBNAIL"/>
-          <div style={{ marginTop: 12 }}>
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:8 }}>
-              <div style={{ fontSize:14.5, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Digital Marketing Essentials</div>
-              <div style={{ fontSize:12, color: t.ink, fontFamily:'"JetBrains Mono", ui-monospace', fontWeight:500, fontVariantNumeric:'tabular-nums' }}>45%</div>
-            </div>
-            <div style={{ display:'flex', alignItems:'center', gap:6, marginTop: 4, fontSize:11.5, color: t.muted }}>
-              <span>Beginner</span>
-              {I.dot(t.faint)}
-              <span>1h 40m left</span>
-              {I.dot(t.faint)}
-              <span>Self-paced</span>
-            </div>
-            <div style={{
-              marginTop: 10, height: 5, borderRadius: 3, background: t.chip,
-              overflow:'hidden', position:'relative',
-            }}>
-              <div style={{
-                position:'absolute', inset:0, width:'45%',
-                background: accent, borderRadius: 3,
-              }}/>
-            </div>
-            <div style={{ display:'flex', justifyContent:'space-between', marginTop: 6, fontSize: 10.5, color: t.faint, fontFamily:'"JetBrains Mono", ui-monospace' }}>
-              <span>Module 4 of 9</span>
-              <span>Next: Funnel metrics</span>
-            </div>
-          </div>
         </Card>
 
         <div style={{ height: 8 }}/>
