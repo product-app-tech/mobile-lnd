@@ -7,7 +7,12 @@
       "Bash(curl:*)",
       "Bash(shasum:*)",
       "Bash(xxd:*)",
-      "Bash(lsof:*)"
+      "Bash(lsof:*)",
+      "Read(//Users/ridho/**)",
+      "Bash(gh api *)",
+      "Bash(gh search *)",
+      "Bash(gh repo *)",
+      "Bash(gh auth *)"
     ]
   }
 }

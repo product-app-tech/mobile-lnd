@@ -2665,26 +2665,31 @@ function Dashboard({ onLogout }) {
         {/* KPI strip — 3 even tiles with icon */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 10 }}>
           {[
-            { k:'9 / 12', l:'Courses', sub:'completed', icon: (c) => (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 7v14"/>
-                <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+            { k:'9 / 12', l:'Courses', sub:'completed', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
               </svg>
             )},
-            { k:'82%',    l:'Avg quiz', sub:'last 30 days', icon: (c) => (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+            { k:'82%',    l:'Avg quiz', sub:'last 30 days', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="m9 12 2 2 4-4"/>
               </svg>
             )},
-            { k:'Normal', l:'Velocity', sub:'on track', icon: (c) => (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            { k:'Normal', l:'Velocity', sub:'on track', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 7h6v6"/>
+                <path d="m22 7-8.5 8.5-5-5L2 17"/>
               </svg>
             )},
           ].map((kpi, i) => (
             <Card t={t} pad={12} key={i} style={{ display:'flex', flexDirection:'column' }}>
-              <div style={{ marginBottom: 8 }}>{kpi.icon(accent)}</div>
+              <div style={{
+                width: 36, height: 36, borderRadius: 10,
+                background: kpi.tileBg, border: `1px solid ${kpi.tileBorder}`,
+                display:'flex', alignItems:'center', justifyContent:'center',
+                marginBottom: 10,
+              }}>{kpi.icon(kpi.iconColor)}</div>
               <div style={{
                 fontSize: kpi.k === 'Normal' ? 17 : 22,
                 fontWeight: 550, letterSpacing:'-0.025em', color: t.ink,
