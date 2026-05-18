@@ -97,11 +97,11 @@ const McIcon = {
   sparkle:(c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" stroke={c} strokeWidth="1.6" strokeLinecap="round"/></svg>),
   external:(c='currentColor') => (<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-9 9M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>),
   back:   (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 18l-6-6 6-6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>),
-  // 24px versions for stat tiles
-  targetLg:(c='currentColor') => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke={c} strokeWidth="1.6"/><circle cx="12" cy="12" r="5" stroke={c} strokeWidth="1.6"/><circle cx="12" cy="12" r="1.6" fill={c}/></svg>),
-  awardLg: (c='currentColor') => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="6" stroke={c} strokeWidth="1.6"/><path d="m8 14-1 8 5-3 5 3-1-8" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
-  bookLg:  (c='currentColor') => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke={c} strokeWidth="1.6"/></svg>),
-  flameLg: (c='currentColor') => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3s4 4 4 8a4 4 0 1 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 0-5 0-7Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
+  // 26px versions for stat tiles
+  targetLg:(c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke={c} strokeWidth="1.6"/><circle cx="12" cy="12" r="5" stroke={c} strokeWidth="1.6"/><circle cx="12" cy="12" r="1.6" fill={c}/></svg>),
+  awardLg: (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="6" stroke={c} strokeWidth="1.6"/><path d="m8 14-1 8 5-3 5 3-1-8" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
+  bookLg:  (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke={c} strokeWidth="1.6"/></svg>),
+  flameLg: (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3s4 4 4 8a4 4 0 1 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 0-5 0-7Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
 };
 
 // ─── Reusable bits ────────────────────────────────────────────
@@ -157,21 +157,22 @@ function McCourseCard({ course, footer, badge }) {
       background:'#FFF', border:`1px solid ${MC_LINE}`,
       borderRadius: 12, overflow:'hidden',
       display:'flex', flexDirection:'column',
+      boxShadow:'0 1px 2px rgba(16, 24, 40, 0.04)',
     }}>
-      <div style={{ position:'relative', width:'100%', height: 140, background:'#F5F5F5' }}>
+      <div style={{ position:'relative', width:'100%', height: 120, background:'#F5F5F5' }}>
         <img src={course.image} alt={course.title}
           onError={e => { e.currentTarget.style.display='none'; }}
           style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-        {badge && (
-          <div style={{ position:'absolute', top: 10, right: 10 }}>{badge}</div>
-        )}
-      </div>
-      <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
         {course.source && (
-          <div style={{ display:'flex' }}>
+          <div style={{ position:'absolute', top: 10, right: 10 }}>
             <McSourceBadge source={course.source}/>
           </div>
         )}
+        {badge && (
+          <div style={{ position:'absolute', top: 10, left: 10 }}>{badge}</div>
+        )}
+      </div>
+      <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
         <div style={{
           fontSize: 14, fontWeight: 600, color: MC_INK, lineHeight:'18px',
           letterSpacing:'-0.01em', minHeight: 36,
@@ -309,9 +310,6 @@ function McCompletionRate() {
       background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12, padding: 14,
       display:'flex', flexDirection:'column', gap: 12,
     }}>
-      <McSectionHeader icon={McIcon.trend} title="Course Completion Rate"
-        subtitle="Your current upskilling progress"/>
-
       <div style={{ width:'100%', display:'grid', gridTemplateColumns:'1fr 1fr', gap: 8 }}>
         <McStat icon={McIcon.targetLg(MC_PRIMARY)} iconBg='rgba(16,86,217,0.10)' label="Total Skills" value={MC_SUMMARY.totalSkills}/>
         <McStat icon={McIcon.awardLg('#16a34a')}   iconBg='#ECFDF3'              label="Achieved"    value={MC_SUMMARY.achieved}/>
