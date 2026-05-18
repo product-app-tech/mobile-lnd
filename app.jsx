@@ -109,6 +109,13 @@ const I = {
       <path d="m9 14 2 2 4-4"/>
     </svg>
   ),
+  // Lucide: Compass
+  compass: (c) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </svg>
+  ),
   dot: (c) => <svg width="4" height="4" viewBox="0 0 4 4"><circle cx="2" cy="2" r="2" fill={c}/></svg>,
 };
 
@@ -2551,10 +2558,10 @@ function Dashboard({ onLogout }) {
     );
   }
 
-  if (tab === 'Assess') {
+  if (tab === 'Discover') {
     return (
       <div style={{ width:'100%', height:'100%', position:'relative', overflow:'hidden' }}>
-        <AssessScreen/>
+        <DiscoverScreen/>
         <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
       </div>
     );
@@ -2709,9 +2716,14 @@ function Dashboard({ onLogout }) {
               <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
               <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Time invested · {period.toLowerCase()}</div>
             </div>
-            {tweaks.showSparkline && (
-              <Sparkline data={[6,8,5,9,7,11,12]} color={accent}/>
-            )}
+            <div style={{
+              display:'inline-flex', alignItems:'center', gap:3,
+              fontSize:12, fontFamily:'"JetBrains Mono", ui-monospace', color: t.success,
+              fontVariantNumeric:'tabular-nums',
+            }}>
+              {I.arrow(t.success)}
+              <span>{periodDelta}</span>
+            </div>
           </div>
           <div style={{ display:'flex', alignItems:'baseline', gap: 6 }}>
             <div style={{
@@ -2720,14 +2732,6 @@ function Dashboard({ onLogout }) {
               fontVariantNumeric:'tabular-nums',
             }}>{periodHours}</div>
             <div style={{ fontSize:18, color: t.muted, fontWeight:400, letterSpacing:'-0.02em' }}>hrs</div>
-            <div style={{
-              marginLeft:'auto', display:'inline-flex', alignItems:'center', gap:3,
-              fontSize:12, fontFamily:'"JetBrains Mono", ui-monospace', color: t.success,
-              fontVariantNumeric:'tabular-nums',
-            }}>
-              {I.arrow(t.success)}
-              <span>{periodDelta}</span>
-            </div>
           </div>
           {/* Mini distribution bar */}
           <div style={{ display:'flex', height: 4, borderRadius: 2, overflow:'hidden', marginTop: 14, gap: 2 }}>
@@ -2845,7 +2849,7 @@ function DashboardTabBar({ tab, setTab, t, accent, tweaks, isDark }) {
           { k:'My Course', icon: I.book },
           { k:'Circle',    icon: I.circle },
           { k:'Journey',   icon: I.path },
-          { k:'Assess',    icon: I.check2 },
+          { k:'Discover',  icon: I.compass },
         ].map(it => {
           const active = it.k === tab;
           return (
