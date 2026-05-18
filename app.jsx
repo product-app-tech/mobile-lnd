@@ -70,7 +70,7 @@ const I = {
   ),
   arrow: (c) => (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path d="M3 9L9 3M9 3H4.5M9 3v4.5" stroke={c} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <polygon points="3,2 10,6 3,10" fill={c} stroke={c} strokeWidth="1.2" strokeLinejoin="round"/>
     </svg>
   ),
   // Lucide: House
@@ -2619,11 +2619,74 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
 
+        {/* Achievement Badges — outperforming hero */}
+        <div style={{
+          background:'linear-gradient(135deg, #194185 0%, #1570EF 55%, #1570EF 100%)',
+          borderRadius: 12, position:'relative', overflow:'hidden',
+          padding: 16, boxShadow:'0 2px 8px rgba(16,24,40,0.06)',
+          color:'#FFF',
+        }}>
+          <div style={{
+            position:'absolute', top:-30, right:-30, width: 140, height: 140,
+            borderRadius:'50%', background:'rgba(255,255,255,0.08)',
+          }}/>
+          <div style={{
+            position:'absolute', bottom:-40, left:-20, width: 110, height: 110,
+            borderRadius:'50%', background:'rgba(255,255,255,0.06)',
+          }}/>
+          <div style={{ position:'relative' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 8, marginBottom: 4 }}>
+              <div style={{
+                width: 26, height: 26, borderRadius: 8,
+                background:'rgba(255,255,255,0.18)',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                border:'1px solid rgba(255,255,255,0.25)',
+              }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="8" r="6"/>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                </svg>
+              </div>
+              <div style={{ fontSize: 13.5, fontWeight: 600, letterSpacing:'-0.01em' }}>
+                You're Outperforming The Average Learner
+              </div>
+            </div>
+            <div style={{ fontSize: 11.5, fontWeight: 450, color:'rgba(255,255,255,0.85)', marginBottom: 12, letterSpacing:'-0.005em' }}>
+              You're on a roll! Keep up the great work.
+            </div>
+            <div style={{ display:'flex', flexDirection:'column', gap: 8 }}>
+              {[
+                { t:'7-Day Streak',    s:"You've kept a 7-day learning streak going",         emoji:'🔥' },
+                { t:'Great Progress',  s:"You've completed 3 advanced exercises",             emoji:'⭐' },
+                { t:'High Achiever',   s:'Your quiz scores are consistently above average',   emoji:'🏆' },
+              ].map((b, i) => (
+                <div key={i} style={{
+                  display:'flex', alignItems:'center', gap: 10,
+                  background:'rgba(255,255,255,0.12)',
+                  border:'1px solid rgba(255,255,255,0.18)',
+                  borderRadius: 10, padding:'8px 10px',
+                  backdropFilter:'blur(4px)',
+                }}>
+                  <div style={{
+                    width: 30, height: 30, borderRadius: 8,
+                    background:'rgba(255,255,255,0.18)',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    fontSize: 15, flexShrink: 0,
+                  }}>{b.emoji}</div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 12.5, fontWeight: 600, letterSpacing:'-0.01em' }}>{b.t}</div>
+                    <div style={{ fontSize: 11, color:'rgba(255,255,255,0.82)', fontWeight: 450, letterSpacing:'-0.005em' }}>{b.s}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Continue Learning — primary action hero */}
         <Card t={t} pad={dense ? 12 : 14}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 10 }}>
+          <div style={{ marginBottom: 10 }}>
             <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em' }}>Continue learning</div>
-            <span style={{ fontSize:11.5, color: accent, fontWeight:500 }}>View all →</span>
           </div>
           <div style={{ display:'flex', gap: 12, alignItems:'flex-start' }}>
             <div style={{
@@ -2667,6 +2730,9 @@ function Dashboard({ onLogout }) {
             Continue
             {I.arrow('#FFF')}
           </button>
+          <div style={{ display:'flex', justifyContent:'center', marginTop: 10 }}>
+            <span style={{ fontSize:11.5, color: accent, fontWeight:500 }}>View all →</span>
+          </div>
         </Card>
 
         {/* KPI strip — 3 even tiles with icon */}
