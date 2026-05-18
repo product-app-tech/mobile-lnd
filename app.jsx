@@ -2621,14 +2621,13 @@ function Dashboard({ onLogout }) {
           <div style={{ display:'flex', gap: 12, alignItems:'flex-start' }}>
             <div style={{
               width: 64, height: 64, borderRadius: 10, flexShrink: 0, overflow:'hidden',
-              background: `repeating-linear-gradient(135deg, ${t.chip} 0 6px, ${t.surface} 6px 12px)`,
               border: `1px solid ${t.line}`,
-              display:'flex', alignItems:'center', justifyContent:'center',
             }}>
-              <span style={{
-                fontFamily:'"JetBrains Mono", ui-monospace', fontSize:8, color: t.muted,
-                letterSpacing:'0.04em',
-              }}>COVER</span>
+              <img
+                src="https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png"
+                alt="Course cover"
+                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+              />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:8 }}>
