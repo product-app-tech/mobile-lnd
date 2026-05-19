@@ -559,13 +559,6 @@ function JnAssignedFooter() {
       }}>
         <span>Start Journey</span><JnIcArrow c="#FFF"/>
       </button>
-      <button style={{
-        width: 40, height: 40, borderRadius: 10,
-        background:'#F5F5F5', color: JN_BODY, border:'none', cursor:'pointer',
-        display:'inline-flex', alignItems:'center', justifyContent:'center',
-      }}>
-        <JnIcMore c={JN_BODY}/>
-      </button>
     </div>
   );
 }
