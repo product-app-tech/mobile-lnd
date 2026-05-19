@@ -117,6 +117,20 @@ const I = {
     </svg>
   ),
   dot: (c) => <svg width="4" height="4" viewBox="0 0 4 4"><circle cx="2" cy="2" r="2" fill={c}/></svg>,
+  // Lucide: Clock
+  clock: (c) => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </svg>
+  ),
+  // Lucide: TrendingUp
+  trendingUp: (c) => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+      <polyline points="16 7 22 7 22 13"/>
+    </svg>
+  ),
 };
 
 // ─── Brand mark ───────────────────────────────────────────
@@ -1240,6 +1254,37 @@ const CR_CHANNELS = [
   { id:'digital-bootcamp',  displayName:'Digital Skills Bootcamp — Feb 2026', section:'course', memberCount: 42, imageUrl:'https://images.unsplash.com/photo-1758691736067-b309ee3ef7b9?w=80&q=70' },
 ];
 
+// DM messages mock (source: /Users/ridho/lnd-presight-demo/.../data/trainee-circle.mock.ts)
+const CR_DM_MESSAGES = {
+  michael: [
+    { id: 'm1', content: 'Pak Michael, saya mau tanya soal assignment sesi 3 — sudah saya submit tadi pagi.', time: '8:00 AM', isSent: true,  status: 'read' },
+    { id: 'm2', content: 'Ada satu bagian di analisis stakeholder yang saya masih kurang yakin, terutama tentang cara mengidentifikasi hidden stakeholder.', time: '8:01 AM', isSent: true, status: 'read' },
+    { id: 'm3', content: 'Score kamu 88/100 — analisis stakeholder-nya sangat tajam. Well done Priya! 🎉', time: '8:30 AM', isSent: false },
+    { id: 'm4', content: 'Wah, terima kasih banyak Pak Michael! Senang sekali dengarnya 😊', time: '9:00 AM', isSent: true, status: 'read' },
+    { id: 'm5', content: 'Pak Michael, boleh tanya soal case study sesi 4? Ada bagian tentang conflict resolution yang masih belum saya pahami.', time: '10:22 AM', isSent: true, status: 'delivered' },
+    { id: 'm6', content: 'Score kamu 88/100 — analisis stakeholder-nya sangat tajam! 🎉', time: '10:30 AM', isSent: false },
+  ],
+  robert: [
+    { id: 'r1', content: 'Selamat pagi Pak Robert! Ini update progress training saya minggu ini.', time: '9:00 AM', isSent: true, status: 'read' },
+    { id: 'r2', content: 'Sesi 3 Leadership sudah selesai, nilai assignment 88/100.', time: '9:01 AM', isSent: true, status: 'read' },
+    { id: 'r3', content: 'Minggu depan mulai sesi Conflict Resolution.', time: '9:02 AM', isSent: true, status: 'read' },
+    { id: 'r4', content: 'Teruslah semangat ya Pri! IDP kamu on-track banget, proud of you.', time: '9:45 AM', isSent: false },
+  ],
+  'study-group': [
+    { id: 'sg1', content: 'Teman-teman, gimana kalau kita bikin jadwal study session mingguan?', time: '8:00 AM', isSent: true, status: 'read' },
+    { id: 'sg2', content: 'Setuju! Kamis aja lebih enak, setelah sesi hari itu masih fresh materinya.', time: '8:30 AM', isSent: false },
+    { id: 'sg3', content: 'Citra: Meet virtual jam 8 malam ya untuk bahas capstone! Topic: pembagian tugas executive summary.', time: '9:00 AM', isSent: false },
+  ],
+  citra: [
+    { id: 'c1', content: 'Pri, share notes sesi 3 dong, kemarin aku ketinggalan beberapa poin pas Pak Michael bahas leadership shadow.', time: '8:30 AM', isSent: false },
+    { id: 'c2', content: 'Boleh banget Cit! Aku kirim notes-nya nanti malam ya 😊', time: '8:32 AM', isSent: true, status: 'read' },
+  ],
+  andi: [
+    { id: 'a1', content: 'Pri, untuk capstone project, bagian executive summary aku assign ke kamu ya. Deadline minggu depan.', time: 'Yesterday', isSent: false },
+    { id: 'a2', content: 'Siap Pak Andi, akan saya kerjakan!', time: 'Yesterday', isSent: true, status: 'read' },
+  ],
+};
+
 function CrIcChat({ c = CR_PRIMARY, s = 20 }) {
   return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
@@ -1381,9 +1426,266 @@ function CrChannelRow({ ch, onOpen }) {
   );
 }
 
-function CircleScreen() {
+// ─── DM icons ─────────────────────────────────────────────
+function CrIcArrowLeft({ c = CR_INK }) {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <path d="M19 12H5M11 18l-6-6 6-6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>;
+}
+function CrIcPhone({ c = CR_FAINT }) {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>;
+}
+function CrIcVideo({ c = CR_FAINT }) {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <polygon points="23 7 16 12 23 17 23 7" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/>
+    <rect x="1" y="5" width="15" height="14" rx="2" stroke={c} strokeWidth="1.7"/>
+  </svg>;
+}
+function CrIcMore({ c = CR_FAINT }) {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <circle cx="5"  cy="12" r="1.5" fill={c}/>
+    <circle cx="12" cy="12" r="1.5" fill={c}/>
+    <circle cx="19" cy="12" r="1.5" fill={c}/>
+  </svg>;
+}
+function CrIcPaperclip({ c = CR_FAINT }) {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>;
+}
+function CrIcSend({ c = '#FFF' }) {
+  return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <line x1="22" y1="2" x2="11" y2="13" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <polygon points="22 2 15 22 11 13 2 9 22 2" stroke={c} strokeWidth="2" strokeLinejoin="round"/>
+  </svg>;
+}
+function CrIcCheck({ c = '#9CA3AF', double }) {
+  if (double) {
+    return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <polyline points="18 6 7 17 2 12" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="22 10 13.5 18.5" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>;
+  }
+  return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <polyline points="20 6 9 17 4 12" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>;
+}
+
+function CrMessageStatus({ status }) {
+  if (!status) return null;
+  if (status === 'read')      return <CrIcCheck c="#BFDBFE" double/>;
+  if (status === 'delivered') return <CrIcCheck c="#D1D5DB" double/>;
+  return <CrIcCheck c="#D1D5DB"/>;
+}
+
+function CrMessageBubble({ message }) {
+  if (message.isSent) {
+    return (
+      <div style={{ display:'flex', justifyContent:'flex-end', marginBottom: 10 }}>
+        <div style={{ maxWidth:'78%' }}>
+          <div style={{
+            background:'linear-gradient(135deg, #3B82F6, #4F46E5)',
+            color:'#FFF', borderRadius: 16, borderBottomRightRadius: 6,
+            padding:'10px 14px',
+            boxShadow:'0 4px 12px rgba(59,130,246,0.20)',
+          }}>
+            <p style={{ margin: 0, fontSize: 13.5, lineHeight:'19px' }}>{message.content}</p>
+          </div>
+          {(message.time || message.status) && (
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', gap: 4, marginTop: 4, paddingRight: 4 }}>
+              <CrMessageStatus status={message.status}/>
+              {message.time && <span style={{ fontSize: 11, color:'#9CA3AF' }}>{message.time}</span>}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div style={{ display:'flex', justifyContent:'flex-start', marginBottom: 10 }}>
+      <div style={{ maxWidth:'78%' }}>
+        <div style={{
+          background:'#F3F4F6', color:'#1F2937',
+          borderRadius: 16, borderBottomLeftRadius: 6,
+          padding:'10px 14px',
+        }}>
+          <p style={{ margin: 0, fontSize: 13.5, lineHeight:'19px' }}>{message.content}</p>
+        </div>
+        {message.time && (
+          <div style={{ display:'flex', alignItems:'center', gap: 4, marginTop: 4, paddingLeft: 4 }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#9CA3AF" strokeWidth="1.7"/>
+              <polyline points="12 6 12 12 16 14" stroke="#9CA3AF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span style={{ fontSize: 11, color:'#9CA3AF' }}>{message.time}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CrDmView({ contact, onBack }) {
+  const messages = CR_DM_MESSAGES[contact.id] || [];
+  const [input, setInput] = React.useState('');
+  const scrollRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [messages.length]);
+
+  return (
+    <div style={{
+      position:'absolute', top:0, left:0, right:0, bottom: 0,
+      background:'#FFF',
+      display:'flex', flexDirection:'column',
+      fontFamily:'"Poppins", -apple-system, system-ui, sans-serif',
+      letterSpacing:'-0.005em',
+      paddingTop: 60,
+    }}>
+      {/* Header */}
+      <div style={{
+        padding:'12px 16px', borderBottom:'1px solid #F3F4F6',
+        display:'flex', alignItems:'center', gap: 12,
+        background:'rgba(255,255,255,0.95)', flexShrink: 0,
+      }}>
+        <button onClick={onBack} aria-label="Back" style={{
+          width: 32, height: 32, borderRadius: 8,
+          background:'transparent', border:'none', cursor:'pointer',
+          display:'inline-flex', alignItems:'center', justifyContent:'center', padding: 0,
+        }}>
+          <CrIcArrowLeft c={CR_INK}/>
+        </button>
+
+        <div style={{ position:'relative', flexShrink: 0 }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: 999, overflow:'hidden',
+            boxShadow:'0 0 0 2px #DBEAFE, 0 0 0 3px #FFF',
+          }}>
+            <img src={contact.avatarUrl} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+          </div>
+          {contact.isOnline && (
+            <span style={{
+              position:'absolute', bottom: 0, right: 0,
+              width: 11, height: 11, borderRadius: 999,
+              background:'#00C073', border:'2px solid #FFF',
+            }}/>
+          )}
+        </div>
+
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{
+            fontSize: 14.5, fontWeight: 700, color:'#0F172A',
+            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+            letterSpacing:'-0.01em',
+          }}>{contact.name}</div>
+          <div style={{
+            fontSize: 11.5, fontWeight: 600,
+            color: contact.isOnline ? '#00C073' : '#9CA3AF',
+          }}>{contact.isOnline ? 'Active now' : 'Offline'}</div>
+        </div>
+
+        <div style={{ display:'flex', alignItems:'center', gap: 2, flexShrink: 0 }}>
+          <button aria-label="Call" style={{
+            width: 32, height: 32, borderRadius: 10,
+            background:'transparent', border:'none', cursor:'pointer',
+            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
+          }}><CrIcPhone/></button>
+          <button aria-label="Video" style={{
+            width: 32, height: 32, borderRadius: 10,
+            background:'transparent', border:'none', cursor:'pointer',
+            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
+          }}><CrIcVideo/></button>
+          <button aria-label="More" style={{
+            width: 32, height: 32, borderRadius: 10,
+            background:'transparent', border:'none', cursor:'pointer',
+            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
+          }}><CrIcMore/></button>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div ref={scrollRef} style={{
+        flex: 1, overflowY:'auto', minHeight: 0,
+        padding:'18px 16px',
+      }}>
+        {/* TODAY separator */}
+        <div style={{ display:'flex', alignItems:'center', gap: 10, margin:'8px 0 14px' }}>
+          <div style={{ flex: 1, height: 1, background:'#F3F4F6' }}/>
+          <span style={{
+            fontSize: 10.5, fontWeight: 700, color:'#9CA3AF',
+            textTransform:'uppercase', letterSpacing:'0.12em',
+          }}>Today</span>
+          <div style={{ flex: 1, height: 1, background:'#F3F4F6' }}/>
+        </div>
+        {messages.map(msg => <CrMessageBubble key={msg.id} message={msg}/>)}
+      </div>
+
+      {/* Input bar */}
+      <div style={{
+        padding:'10px 14px 18px', borderTop:'1px solid #F3F4F6',
+        flexShrink: 0, background:'rgba(255,255,255,0.95)',
+      }}>
+        <div style={{
+          display:'flex', alignItems:'center', gap: 10,
+          background:'#FFF', border:'1px solid #E5E7EB', borderRadius: 18,
+          padding:'8px 12px',
+          boxShadow:'0 2px 8px rgba(0,0,0,0.04)',
+        }}>
+          <button aria-label="Attach" style={{
+            background:'transparent', border:'none', cursor:'pointer', padding: 0,
+            display:'inline-flex', alignItems:'center', color: CR_FAINT,
+          }}><CrIcPaperclip/></button>
+          <input
+            type="text"
+            placeholder={`Message ${contact.name}...`}
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            style={{
+              flex: 1, border:'none', outline:'none', background:'transparent',
+              fontFamily:'inherit', fontSize: 13, color:'#1F2937', minWidth: 0,
+            }}
+          />
+          <button
+            disabled={!input.trim()}
+            onClick={() => setInput('')}
+            style={{
+              width: 30, height: 30, borderRadius: 10, border:'none',
+              cursor: input.trim() ? 'pointer' : 'not-allowed',
+              display:'inline-flex', alignItems:'center', justifyContent:'center',
+              background: input.trim()
+                ? 'linear-gradient(135deg, #3B82F6, #4F46E5)'
+                : '#F3F4F6',
+              color: input.trim() ? '#FFF' : '#D1D5DB',
+              boxShadow: input.trim() ? '0 4px 10px rgba(59,130,246,0.25)' : 'none',
+              flexShrink: 0,
+            }}
+          ><CrIcSend c={input.trim() ? '#FFF' : '#D1D5DB'}/></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CircleScreen({ onDmChange }) {
   const [tab, setTab] = React.useState('dm');
   const [search, setSearch] = React.useState('');
+  const [openContactId, setOpenContactId] = React.useState(null);
+
+  // Notify parent when DM is opened/closed so it can hide tab bar
+  React.useEffect(() => {
+    if (onDmChange) onDmChange(!!openContactId);
+  }, [openContactId, onDmChange]);
+
+  const openContact = openContactId
+    ? CR_CONTACTS.find(c => c.id === openContactId)
+    : null;
+
+  if (openContact) {
+    return <CrDmView contact={openContact} onBack={() => setOpenContactId(null)}/>;
+  }
 
   const dms = CR_CONTACTS.filter(c =>
     !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.lastMessage.toLowerCase().includes(search.toLowerCase())
@@ -1493,7 +1795,7 @@ function CircleScreen() {
           {tab === 'dm' ? (
             dms.length === 0
               ? <div style={{ padding:'28px 0', textAlign:'center', fontSize: 13, color: CR_MUTED }}>No conversations found.</div>
-              : dms.map(c => <CrContactRow key={c.id} c={c} onOpen={() => {}}/>)
+              : dms.map(c => <CrContactRow key={c.id} c={c} onOpen={() => setOpenContactId(c.id)}/>)
           ) : (
             channels.length === 0
               ? <div style={{ padding:'28px 0', textAlign:'center', fontSize: 13, color: CR_MUTED }}>No channels found.</div>
@@ -2531,6 +2833,12 @@ function Dashboard({ onLogout }) {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [period, setPeriod] = React.useState('Week');
   const [tab, setTab] = React.useState('Dashboard');
+  const [circleDmOpen, setCircleDmOpen] = React.useState(false);
+
+  // Reset DM-open flag when switching away from Circle tab
+  React.useEffect(() => {
+    if (tab !== 'Circle' && circleDmOpen) setCircleDmOpen(false);
+  }, [tab, circleDmOpen]);
 
   const t = THEMES[tweaks.theme] || THEMES.light;
   const accent = ACCENTS[tweaks.accent].hex;
@@ -2558,10 +2866,10 @@ function Dashboard({ onLogout }) {
     );
   }
 
-  if (tab === 'Discover') {
+  if (tab === 'Assessment') {
     return (
       <div style={{ width:'100%', height:'100%', position:'relative', overflow:'hidden' }}>
-        <DiscoverScreen/>
+        <AssessScreen/>
         <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
       </div>
     );
@@ -2570,8 +2878,10 @@ function Dashboard({ onLogout }) {
   if (tab === 'Circle') {
     return (
       <div style={{ width:'100%', height:'100%', position:'relative', overflow:'hidden' }}>
-        <CircleScreen/>
-        <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
+        <CircleScreen onDmChange={setCircleDmOpen}/>
+        {!circleDmOpen && (
+          <DashboardTabBar tab={tab} setTab={setTab} t={t} accent={accent} tweaks={tweaks} isDark={isDark}/>
+        )}
       </div>
     );
   }
@@ -2778,9 +3088,18 @@ function Dashboard({ onLogout }) {
         {/* Learning hours — secondary, full card below stats */}
         <Card t={t} pad={dense ? 14 : 18}>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: 12 }}>
-            <div>
-              <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
-              <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Time invested · {period.toLowerCase()}</div>
+            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              <div style={{
+                width: 32, height: 32, borderRadius: 8,
+                background: '#EFF8FF', border: '1px solid #B2DDFF',
+                display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
+              }}>
+                {I.clock(accent)}
+              </div>
+              <div>
+                <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
+                <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Time invested · {period.toLowerCase()}</div>
+              </div>
             </div>
             <div style={{
               display:'inline-flex', alignItems:'center', gap:3,
@@ -2869,9 +3188,18 @@ function Dashboard({ onLogout }) {
         {/* Performance trend */}
         <Card t={t} pad={dense ? 14 : 16}>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: 6 }}>
-            <div>
-              <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Performance trend</div>
-              <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Avg score · last 6 courses</div>
+            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+              <div style={{
+                width: 32, height: 32, borderRadius: 8,
+                background: '#EFF8FF', border: '1px solid #B2DDFF',
+                display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
+              }}>
+                {I.trendingUp(accent)}
+              </div>
+              <div>
+                <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Performance trend</div>
+                <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Avg score · last 6 courses</div>
+              </div>
             </div>
             <div style={{
               display:'inline-flex', alignItems:'center', gap:4,
@@ -2915,7 +3243,7 @@ function DashboardTabBar({ tab, setTab, t, accent, tweaks, isDark }) {
           { k:'My Course', icon: I.book },
           { k:'Circle',    icon: I.circle },
           { k:'Journey',   icon: I.path },
-          { k:'Discover',  icon: I.compass },
+          { k:'Assessment', icon: I.compass },
         ].map(it => {
           const active = it.k === tab;
           return (

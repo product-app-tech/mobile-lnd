@@ -14,7 +14,19 @@
       "Bash(gh repo *)",
       "Bash(gh auth *)",
       "Bash(git -C /Users/ridho/Documents/Workspace/Mobile-LnD diff mycourse.jsx)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__get_design_context",
+      "Skill(figma:figma-use)",
+      "Skill(figma:figma-use:*)",
+      "mcp__claude_ai_Figma__use_figma",
+      "Bash(grep -nB1 -A1 \"MyCourse\\\\|<McCourse\" /Users/ridho/Documents/Workspace/Mobile-LnD/app.jsx)",
+      "Bash(grep -nE \"^}$|McUpskillHub|\\\\}\\\\\\)\\\\;$\" /Users/ridho/Documents/Workspace/Mobile-LnD/mycourse.jsx)"
+    ],
+    "additionalDirectories": [
+      "/tmp",
+      "/private/tmp"
     ]
   }
 }

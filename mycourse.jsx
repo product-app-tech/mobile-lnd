@@ -102,6 +102,27 @@ const McIcon = {
   awardLg: (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="6" stroke={c} strokeWidth="1.6"/><path d="m8 14-1 8 5-3 5 3-1-8" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
   bookLg:  (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke={c} strokeWidth="1.6"/></svg>),
   flameLg: (c='currentColor') => (<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3s4 4 4 8a4 4 0 1 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 0-5 0-7Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
+  // 18px meta-row icons (matches ProgramDetail Figma)
+  barChart: (c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke={c} strokeWidth="1.8" strokeLinecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke={c} strokeWidth="1.8" strokeLinecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke={c} strokeWidth="1.8" strokeLinecap="round"/></svg>),
+  bookOpen: (c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 7v14" stroke={c} strokeWidth="1.8" strokeLinecap="round"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" stroke={c} strokeWidth="1.8" strokeLinejoin="round"/></svg>),
+  clock18:  (c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke={c} strokeWidth="1.8"/><polyline points="12 6 12 12 16 14" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>),
+  calendar:(c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke={c} strokeWidth="1.8"/><line x1="16" y1="2" x2="16" y2="6" stroke={c} strokeWidth="1.8" strokeLinecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke={c} strokeWidth="1.8" strokeLinecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke={c} strokeWidth="1.8"/></svg>),
+  // Detail-page extras
+  chevronUp:   (c='currentColor', s=18) => (<svg width={s} height={s} viewBox="0 0 24 24" fill="none"><path d="m18 15-6-6-6 6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  chevronDown: (c='currentColor', s=18) => (<svg width={s} height={s} viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  awardSm:     (c='currentColor') => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="6" stroke={c} strokeWidth="1.6"/><path d="m15.477 12.89 1.523 9.11-5-3-5 3 1.523-9.11" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
+  check:       (c='currentColor') => (<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke={c} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  eye:         (c='currentColor', s=18) => (<svg width={s} height={s} viewBox="0 0 24 24" fill="none"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" stroke={c} strokeWidth="1.8"/><circle cx="12" cy="12" r="3" stroke={c} strokeWidth="1.8"/></svg>),
+  // 16px book / clock for module meta
+  book16:      (c='currentColor') => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 7v14" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/></svg>),
+  clock16:     (c='currentColor') => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke={c} strokeWidth="1.6"/><polyline points="12 6 12 12 16 14" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  // Activity-type icons (20px)
+  bulb:        (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.7.7 1 1.5 1 2.3v.5h6V17c0-.8.3-1.6 1-2.3A7 7 0 0 0 12 2Z" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  video:       (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="14" height="12" rx="2" stroke={c} strokeWidth="1.7"/><path d="m22 8-6 4 6 4Z" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/></svg>),
+  slides:      (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="14" rx="2" stroke={c} strokeWidth="1.7"/><line x1="12" y1="17" x2="12" y2="21" stroke={c} strokeWidth="1.7" strokeLinecap="round"/><line x1="8"  y1="21" x2="16" y2="21" stroke={c} strokeWidth="1.7" strokeLinecap="round"/></svg>),
+  clipCheck:   (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="4" rx="1" stroke={c} strokeWidth="1.7"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" stroke={c} strokeWidth="1.7"/><path d="m9 14 2 2 4-4" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  radio:       (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" stroke={c} strokeWidth="1.7"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.48M20.49 4a10 10 0 0 1 0 16M3.51 20a10 10 0 0 1 0-16" stroke={c} strokeWidth="1.7" strokeLinecap="round"/></svg>),
+  file:        (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/><polyline points="14 2 14 8 20 8" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/></svg>),
 };
 
 // ─── Reusable bits ────────────────────────────────────────────
@@ -345,88 +366,624 @@ function McStat({ icon, iconBg, label, value }) {
   );
 }
 
-// ─── Course details (selected course preview) ─────────────────
+// ─── Program Detail page (replaces inline McCourseDetails) ─────
+// Source: /Users/ridho/lnd-presight-demo/src/pages/trainee/journey/program-detail/components
+// Adapted for mobile 420px width — Figma frame ProgramDetail (node 9017:422)
 
-function McCourseDetails({ courseId, onBack }) {
+const MC_STATUS_STYLES = {
+  'Upcoming Program': { bg: '#eaf7ff', border: '#a9d1ff', fg: '#0f76ec' },
+  'In Progress':      { bg: '#ecfdf3', border: '#2dd4bf', fg: '#0d9488' },
+  'Completed':        { bg: '#d1fadf', border: '#17b26a', fg: '#059669' },
+};
+
+const MC_LEVEL_STYLES = {
+  Beginner:     { bg: '#ECFDF3', fg: '#027A48' },
+  Intermediate: { bg: '#FFFAEB', fg: '#B54708' },
+  Advanced:     { bg: '#FEF3F2', fg: '#B42318' },
+};
+
+const MC_INSTRUCTOR = {
+  name: 'Dr. Sarah Mitchell',
+  company: 'AI Ethics Institute',
+  experience: 10,
+  rating: 4.8,
+  certifications: 5,
+  avatarInitials: 'SM',
+  avatarGradient: 'linear-gradient(135deg, #c06e84, #6e3a85)',
+};
+
+// Extra detail fields per course (description, objectives, gain, skills, course overview).
+// Indexed by course id; falls back to MC_DEFAULT_DETAILS if not present.
+const MC_PROGRAM_DETAILS = {
+  'up-1': {
+    description:
+      'Comprehensive program on AI ethics and responsible AI implementation. Covers fairness, transparency, accountability, and practical frameworks for deploying AI systems that align with organizational values and regulatory requirements.',
+    learningObjectives: [
+      'Understand core principles of AI ethics and responsible AI.',
+      'Identify bias and fairness risks in real-world AI systems.',
+      'Apply governance frameworks to AI product decisions.',
+      'Build transparency and accountability into AI workflows.',
+    ],
+    whatYoullGain: [
+      'Certificate of Completion',
+      'Responsible AI Practitioner Badge',
+    ],
+    skillsCovered: [
+      'AI Ethics',
+      'Bias Detection',
+      'AI Governance',
+      'Transparent AI',
+      'Risk Assessment',
+    ],
+    courseOverview: [
+      {
+        id: 'ai-sec-1',
+        title: 'Foundations of AI Ethics',
+        duration: '1h 20m',
+        level: 'Beginner',
+        source: null,
+        description: 'Core ethical principles, frameworks, and why AI ethics matters today.',
+        courseModules: [
+          {
+            id: 'ai-mod-1',
+            title: 'What is AI Ethics?',
+            duration: '40 min',
+            activities: [
+              { id: 'ai-act-1', title: 'Defining Responsible AI',          type: 'Reading Material',     duration: '12 min' },
+              { id: 'ai-act-2', title: 'Case Study: AI Bias in Hiring',    type: 'Microlearning Video',  duration: '15 min' },
+              { id: 'ai-act-3', title: 'Ethics Knowledge Check',           type: 'Quiz',                 duration: '13 min' },
+            ],
+          },
+          {
+            id: 'ai-mod-2',
+            title: 'Ethical Frameworks for AI',
+            duration: '40 min',
+            activities: [
+              { id: 'ai-act-4', title: 'Utilitarian vs Deontological AI',  type: 'Microlearning Slides', duration: '20 min' },
+              { id: 'ai-act-5', title: 'Framework Application Exercise',   type: 'Assignment',           duration: '20 min' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'ai-sec-2',
+        title: 'Bias, Fairness & Transparency',
+        duration: '2h 10m',
+        level: 'Intermediate',
+        source: null,
+        description: 'Detecting and mitigating bias; designing transparent and explainable AI systems.',
+        courseModules: [
+          {
+            id: 'ai-mod-3',
+            title: 'Detecting Bias in Datasets',
+            duration: '55 min',
+            activities: [
+              { id: 'ai-act-6', title: 'Sources of Bias',                  type: 'Reading Material',     duration: '15 min' },
+              { id: 'ai-act-7', title: 'Bias Audit Walkthrough',           type: 'Microlearning Video',  duration: '25 min' },
+              { id: 'ai-act-8', title: 'Practice: Audit a Dataset',        type: 'Assignment',           duration: '15 min' },
+            ],
+          },
+          {
+            id: 'ai-mod-4',
+            title: 'Building Transparent AI',
+            duration: '75 min',
+            activities: [
+              { id: 'ai-act-9',  title: 'Explainability Methods Overview', type: 'Microlearning Slides', duration: '20 min' },
+              { id: 'ai-act-10', title: 'Live Q&A with Researcher',        type: 'Live Session',         duration: '45 min' },
+              { id: 'ai-act-11', title: 'Transparency Checklist Quiz',     type: 'Quiz',                 duration: '10 min' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'ai-sec-3',
+        title: 'Governance & Practical Implementation',
+        duration: '2h 30m',
+        level: 'Advanced',
+        source: "O'Reilly",
+        description: 'Externally hosted on O’Reilly — covers responsible AI governance, regulation, and rollout playbooks.',
+        courseModules: null,
+      },
+    ],
+  },
+};
+
+const MC_DEFAULT_DETAILS = {
+  description: 'Detailed course information will be available soon.',
+  learningObjectives: [],
+  whatYoullGain: [],
+  skillsCovered: [],
+  courseOverview: [],
+};
+
+// Activity-type → icon + tint config (mirrors source)
+const MC_ACTIVITY_CONFIG = {
+  'Reading Material':      { color: '#F9AC4E', bg: 'rgba(254,202,87,0.15)', label: 'Reading Material' },
+  'Microlearning Video':   { color: '#E53E3E', bg: 'rgba(229,62,62,0.15)',  label: 'Video Learning' },
+  'Microlearning Slides':  { color: '#38A169', bg: 'rgba(56,161,105,0.15)', label: 'Slides Material' },
+  'Microlearning':         { color: '#38A169', bg: 'rgba(56,161,105,0.15)', label: 'Microlearning' },
+  'Quiz':                  { color: '#575FCF', bg: 'rgba(87,95,207,0.15)',  label: 'Knowledge Check' },
+  'Live Session':          { color: '#3182CE', bg: 'rgba(49,130,206,0.15)', label: 'Live Session' },
+  'Assignment':            { color: '#DD6B20', bg: 'rgba(221,107,32,0.15)', label: 'Assignment' },
+};
+
+function McCourseDetails({ courseId, onBack, onStartCourse }) {
   const course = [...MC_ASSIGNED, ...MC_UPCOMING, ...MC_ONGOING, ...MC_COMPLETED]
     .find(c => c.id === courseId) || MC_ASSIGNED[0];
-  const lessons = [
-    { title:'Introduction & Course Goals', dur:'8 min', done:true },
-    { title:'Core Concepts Walkthrough',   dur:'22 min', done:true },
-    { title:'Hands-on Practice',           dur:'35 min', done:false },
-    { title:'Wrap-up & Assessment',        dur:'15 min', done:false },
-  ];
-  const remainingMin = lessons.filter(l => !l.done).reduce((s, l) => s + parseInt(l.dur, 10), 0);
-  const timeRemaining = remainingMin >= 60
-    ? `${Math.floor(remainingMin / 60)}h ${remainingMin % 60}m left`
-    : `${remainingMin}m left`;
+
+  // Derive programStatus from which collection course belongs to
+  let programStatus = 'Upcoming Program';
+  if (MC_ONGOING.find(c => c.id === courseId))         programStatus = 'In Progress';
+  else if (MC_COMPLETED.find(c => c.id === courseId))  programStatus = 'Completed';
+  else if (MC_UPCOMING.find(c => c.id === courseId))   programStatus = 'Upcoming Program';
+  const status = MC_STATUS_STYLES[programStatus];
+
+  // Detail payload (description, objectives, gain, skills, courseOverview)
+  const details = MC_PROGRAM_DETAILS[courseId] || MC_DEFAULT_DETAILS;
+
+  // Duration: ongoing/completed use course.duration ("4h 12 min"), upcoming uses course.date
+  const durationText = course.duration || '12h';
+  const dateText = course.date || '16 Mar - 17 Mar 2026';
 
   return (
     <div style={{ display:'flex', flexDirection:'column', gap: 14 }}>
-      {/* Back row */}
-      <button onClick={onBack} style={{
-        alignSelf:'flex-start',
-        display:'inline-flex', alignItems:'center', gap: 6,
-        background:'transparent', border:'none', cursor:'pointer', padding: 0,
-        color: MC_BODY, fontFamily:'inherit', fontSize: 13.5, fontWeight: 500,
-      }}>{McIcon.back(MC_BODY)} Back</button>
+      {/* Header row: back button + label */}
+      <div style={{ display:'flex', alignItems:'center', gap: 12 }}>
+        <button onClick={onBack} aria-label="Back" style={{
+          width: 36, height: 36, borderRadius: 10,
+          background:'#FFF', border:`1px solid ${MC_LINE}`, cursor:'pointer',
+          display:'inline-flex', alignItems:'center', justifyContent:'center', padding: 0,
+        }}>
+          {McIcon.back(MC_INK)}
+        </button>
+        <span style={{ fontSize: 14, fontWeight: 500, color: MC_BODY }}>Back</span>
+      </div>
 
+      {/* Hero image (standalone) */}
       <div style={{
-        background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12, padding: 16,
-        display:'flex', flexDirection:'column', gap: 14,
+        position:'relative', width:'100%', height: 200,
+        borderRadius: 12, overflow:'hidden',
+        background: 'linear-gradient(135deg, #2d3e6b 0%, #4a55a8 50%, #6e4ac8 100%)',
       }}>
-        <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
-          <div style={{ position:'relative', width:'100%', height: 180, borderRadius: 10, overflow:'hidden', background:'#F5F5F5' }}>
-            <img src={course.image} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
-            <div style={{ position:'absolute', top: 10, right: 10 }}>
-              <McSourceBadge source={course.source}/>
+        <img src={course.image} alt="" style={{ width:'100%', height:'100%', objectFit:'cover', opacity: 0.85 }}/>
+        <div style={{
+          position:'absolute', inset: 0,
+          background:'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35) 100%)',
+        }}/>
+      </div>
+
+      {/* Course Info card (title + status + meta) */}
+      <div style={{
+        background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12,
+        padding: 16,
+        display:'flex', flexDirection:'column', gap: 14,
+        boxShadow:'0 2px 8px rgba(16,24,40,0.06)',
+      }}>
+        {/* Status chip */}
+        <span style={{
+          alignSelf:'flex-start',
+          padding:'3px 9px', borderRadius: 10,
+          background: status.bg, border:`1px solid ${status.border}`,
+          fontSize: 11.5, fontWeight: 500, color: status.fg,
+          display:'inline-flex', alignItems:'center',
+        }}>{programStatus}</span>
+
+        {/* Title */}
+        <div style={{
+          fontSize: 20, fontWeight: 600, color: MC_INK,
+          lineHeight:'26px', letterSpacing:'-0.01em',
+        }}>{course.title}</div>
+
+        {/* Divider */}
+        <div style={{ width:'100%', height: 0, borderTop:`1px solid ${MC_LINE}` }}/>
+
+        {/* Meta grid (2 rows × 2 cols) */}
+        <div style={{ display:'flex', flexDirection:'column', gap: 12 }}>
+          <div style={{ display:'flex', gap: 16, alignItems:'center', flexWrap:'wrap' }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 6 }}>
+              {McIcon.barChart(MC_BODY)}
+              <span style={{ fontSize: 13.5, color: MC_BODY }}>{course.level}</span>
+            </div>
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 6 }}>
+              {McIcon.bookOpen(MC_BODY)}
+              <span style={{ fontSize: 13.5, color: MC_BODY }}>{course.type || 'Blended Learning'}</span>
             </div>
           </div>
-          <div style={{ display:'flex', flexDirection:'column', gap: 6 }}>
-            <div style={{ fontSize: 16, fontWeight: 600, color: MC_INK, lineHeight:'20px', letterSpacing:'-0.01em' }}>{course.title}</div>
-            <McMetaRow items={[
-              { icon: McIcon.bars(MC_MUTED),  text: course.level },
-              { icon: McIcon.clock(MC_MUTED), text: course.duration || course.date },
-            ]}/>
+          <div style={{ display:'flex', gap: 16, alignItems:'center', flexWrap:'wrap' }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 6 }}>
+              {McIcon.clock18(MC_BODY)}
+              <span style={{ fontSize: 13.5, color: MC_BODY }}>{durationText}</span>
+            </div>
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 6 }}>
+              {McIcon.calendar(MC_BODY)}
+              <span style={{ fontSize: 13.5, color: MC_BODY }}>{dateText}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Instructor card */}
+      <div style={{
+        background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12,
+        padding: 16,
+        display:'flex', flexDirection:'column', gap: 16,
+        boxShadow:'0 2px 8px rgba(16,24,40,0.06)',
+      }}>
+        {/* Top: avatar + name */}
+        <div style={{ display:'flex', alignItems:'center', gap: 16 }}>
+          <div style={{
+            width: 56, height: 56, borderRadius: 999,
+            background: MC_INSTRUCTOR.avatarGradient,
+            display:'flex', alignItems:'center', justifyContent:'center',
+            color:'#FFF', fontSize: 20, fontWeight: 600, letterSpacing:'-0.01em',
+            flexShrink: 0,
+          }}>{MC_INSTRUCTOR.avatarInitials}</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 500, color: MC_INK, lineHeight:'22px' }}>{MC_INSTRUCTOR.name}</div>
+            <div style={{ fontSize: 12, fontWeight: 300, color: MC_MUTED, lineHeight:'18px' }}>{MC_INSTRUCTOR.company}</div>
           </div>
         </div>
 
-        <div style={{ display:'flex', flexDirection:'column', gap: 8 }}>
-          {lessons.map((l, i) => (
-            <div key={i} style={{
-              display:'flex', alignItems:'center', gap: 10,
-              padding:'10px 12px', borderRadius: 10,
-              background: l.done ? MC_SUCCESS_SOFT : '#FAFAFA',
-              border:`1px solid ${l.done ? '#D1FADF' : MC_LINE}`,
-            }}>
-              <div style={{
-                width: 22, height: 22, borderRadius: 999,
-                background: l.done ? MC_SUCCESS : '#FFF',
-                border: l.done ? 'none' : `1.5px solid ${MC_LINE}`,
-                display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
-              }}>
-                {l.done && <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-11" stroke="#FFF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+        {/* Stats row */}
+        <div style={{ display:'flex', alignItems:'center', gap: 4 }}>
+          <div style={{ flex: 1, display:'flex', flexDirection:'column', alignItems:'center' }}>
+            <span style={{ fontSize: 20, fontWeight: 500, color:'#000', lineHeight:'20px' }}>{MC_INSTRUCTOR.experience}</span>
+            <span style={{ fontSize: 12, fontWeight: 300, color: MC_MUTED, lineHeight:'18px' }}>Experience</span>
+          </div>
+          <button type="button" title="View course ratings" style={{
+            flex: 1, display:'flex', flexDirection:'column', alignItems:'center',
+            borderLeft:'1px solid rgba(0,0,0,0.10)', borderRight:'1px solid rgba(0,0,0,0.10)',
+            borderTop:'none', borderBottom:'none',
+            background:'transparent', cursor:'pointer', padding: 0,
+          }}>
+            <span style={{ fontSize: 20, fontWeight: 500, color:'#0f76ec', lineHeight:'20px' }}>{MC_INSTRUCTOR.rating}</span>
+            <span style={{ fontSize: 12, fontWeight: 400, color:'#0f76ec', lineHeight:'18px' }}>Rating ›</span>
+          </button>
+          <div style={{ flex: 1, display:'flex', flexDirection:'column', alignItems:'center' }}>
+            <span style={{ fontSize: 20, fontWeight: 500, color:'#000', lineHeight:'20px' }}>{MC_INSTRUCTOR.certifications}</span>
+            <span style={{ fontSize: 12, fontWeight: 300, color: MC_MUTED, lineHeight:'18px' }}>Certification</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Journey Details (description + objectives + gain + skills) */}
+      <McProgramInfo details={details}/>
+
+      {/* Journey Program (overview: course sections with expandable modules+activities) */}
+      <McProgramOverview sections={details.courseOverview}/>
+
+      {/* Start Course CTA */}
+      <button onClick={onStartCourse} style={{
+        marginTop: 4, height: 48, borderRadius: 10,
+        background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
+        fontFamily:'inherit', fontSize: 14, fontWeight: 600,
+        display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+      }}>Start Course {McIcon.arrow('#FFF')}</button>
+    </div>
+  );
+}
+
+function McNoticeModal({ onClose }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position:'absolute', inset: 0, zIndex: 1000,
+        background:'rgba(15,23,42,0.55)',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        padding: 24, fontFamily:'inherit',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background:'#FFF', borderRadius: 16,
+          maxWidth: 320, width:'100%',
+          padding:'24px 20px 20px',
+          display:'flex', flexDirection:'column', alignItems:'center', gap: 12,
+          boxShadow:'0 24px 48px rgba(16,24,40,0.18), 0 4px 8px rgba(16,24,40,0.08)',
+        }}
+      >
+        {/* Icon */}
+        <div style={{
+          width: 56, height: 56, borderRadius: 16,
+          background: MC_PRIMARY_SOFT,
+          display:'flex', alignItems:'center', justifyContent:'center',
+        }}>
+          {/* Browser/globe icon */}
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke={MC_PRIMARY} strokeWidth="1.8"/>
+            <line x1="2" y1="12" x2="22" y2="12" stroke={MC_PRIMARY} strokeWidth="1.8"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke={MC_PRIMARY} strokeWidth="1.8"/>
+          </svg>
+        </div>
+
+        <div style={{
+          fontSize: 17, fontWeight: 600, color: MC_INK,
+          textAlign:'center', letterSpacing:'-0.01em',
+        }}>Continue on the web</div>
+
+        <p style={{
+          margin: 0,
+          fontSize: 13.5, color: MC_BODY,
+          textAlign:'center', lineHeight:'20px',
+        }}>
+          This course needs to be opened on the website. Please continue from your desktop browser to start learning.
+        </p>
+
+        <button onClick={onClose} style={{
+          width:'100%', marginTop: 8, height: 44, borderRadius: 10,
+          background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
+          fontFamily:'inherit', fontSize: 14, fontWeight: 600,
+        }}>Got it</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Sub-components for ProgramDetail (Info + Overview) ────────
+
+function McProgramInfo({ details }) {
+  if (!details.description && (details.learningObjectives?.length ?? 0) === 0) return null;
+  return (
+    <div style={{
+      background:'#FFF', borderRadius: 10, overflow:'hidden',
+      border:`1px solid ${MC_LINE}`,
+    }}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 16, padding: 16 }}>
+        <div style={{ fontSize: 20, fontWeight: 500, color: MC_INK, lineHeight:'20px' }}>Journey Details</div>
+        <div style={{ width:'100%', height: 0, borderBottom:'1px solid rgba(0,0,0,0.10)' }}/>
+
+        {details.description && (
+          <p style={{ fontSize: 12, color: MC_BODY, lineHeight:'22px', margin: 0 }}>{details.description}</p>
+        )}
+
+        {/* Two-column section: objectives + gain (stacked on narrow mobile) */}
+        {(details.learningObjectives?.length || details.whatYoullGain?.length) ? (
+          <div style={{ display:'flex', flexDirection:'column', gap: 14 }}>
+            {details.learningObjectives?.length > 0 && (
+              <div>
+                <p style={{ fontSize: 12, color: MC_MUTED, marginBottom: 6, margin: 0 }}>Learning objectives:</p>
+                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12, color: MC_BODY }}>
+                  {details.learningObjectives.map((obj, i) => (
+                    <li key={i} style={{ marginBottom: 2, listStyleType: 'disc' }}>{obj}</li>
+                  ))}
+                </ul>
               </div>
-              <div style={{ flex: 1, fontSize: 13, color: MC_BODY, fontWeight: l.done ? 500 : 550 }}>{l.title}</div>
-              <span style={{ fontSize: 11.5, color: MC_MUTED }}>{l.dur}</span>
+            )}
+            {details.whatYoullGain?.length > 0 && (
+              <div style={{ display:'flex', flexDirection:'column', gap: 9 }}>
+                <p style={{ fontSize: 12, fontWeight: 300, color: MC_MUTED, margin: 0 }}>What you’ll gain:</p>
+                {details.whatYoullGain.map((item, i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap: 6 }}>
+                    {McIcon.awardSm(MC_PRIMARY)}
+                    <span style={{ fontSize: 12, color: MC_BODY, letterSpacing:'0.01em' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        {/* Skills */}
+        {details.skillsCovered?.length > 0 && (
+          <div style={{ display:'flex', flexDirection:'column', gap: 8 }}>
+            <p style={{ fontSize: 14, color: MC_BODY, opacity: 0.5, lineHeight:'20px', margin: 0 }}>Skills covered:</p>
+            <div style={{ display:'flex', gap: 6, flexWrap:'wrap' }}>
+              {details.skillsCovered.map((skill, i) => (
+                <span key={i} style={{
+                  padding:'4px 8px', borderRadius: 6,
+                  border:'1px solid rgba(0,0,0,0.10)',
+                  fontSize: 12, color: MC_BODY, lineHeight:'18px',
+                }}>{skill}</span>
+              ))}
             </div>
-          ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function McProgramOverview({ sections }) {
+  const [expandedCourses, setExpandedCourses] = React.useState({});
+  const [expandedModules, setExpandedModules] = React.useState({});
+  if (!sections || sections.length === 0) return null;
+
+  return (
+    <div style={{
+      background:'#FFF', borderRadius: 12,
+      border:`1px solid ${MC_LINE}`,
+    }}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 12, padding: 16 }}>
+        <div style={{ fontSize: 20, fontWeight: 500, color: MC_BODY, lineHeight:'28px' }}>Journey Program</div>
+        {sections.map(section => (
+          <McSectionCard
+            key={section.id}
+            section={section}
+            isExpanded={!!expandedCourses[section.id]}
+            onToggle={() => setExpandedCourses(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+            expandedModules={expandedModules}
+            onToggleModule={id => setExpandedModules(prev => ({ ...prev, [id]: !prev[id] }))}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function McSectionCard({ section, isExpanded, onToggle, expandedModules, onToggleModule }) {
+  const totalModules = section.courseModules?.length ?? 0;
+  const isExternal = section.source === 'LinkedIn' || section.source === "O'Reilly";
+  const levelStyle = section.level ? MC_LEVEL_STYLES[section.level] : null;
+
+  return (
+    <div style={{
+      background:'#FFF', borderRadius: 16,
+      border:'1px solid rgba(0,0,0,0.10)', overflow:'hidden',
+    }}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 12, padding:'16px 20px' }}>
+        {/* Header */}
+        <button
+          onClick={isExternal ? undefined : onToggle}
+          disabled={isExternal}
+          style={{
+            display:'flex', alignItems:'center', justifyContent:'space-between',
+            width:'100%', gap: 12, background:'transparent', border:'none',
+            cursor: isExternal ? 'default' : 'pointer', padding: 0, textAlign:'left',
+          }}>
+          <span style={{
+            fontSize: 16, fontWeight: 500, color: MC_BODY, lineHeight:'20px',
+            flex: 1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+          }}>{section.title}</span>
+          {isExternal ? (
+            <span style={{
+              height: 32, padding:'0 12px', borderRadius: 16,
+              border:'1px solid #cfddf7', background:'#FFF',
+              display:'inline-flex', alignItems:'center', gap: 8,
+              fontSize: 12, color: MC_BODY,
+            }}>{McIcon.eye('#88ABEC', 14)} View</span>
+          ) : (
+            isExpanded ? McIcon.chevronUp(MC_MUTED) : McIcon.chevronDown(MC_MUTED)
+          )}
+        </button>
+
+        {/* Meta */}
+        <div style={{ display:'flex', alignItems:'center', gap: 12, flexWrap:'wrap' }}>
+          {totalModules > 0 && (
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 4 }}>
+              {McIcon.book16('#292952')}
+              <span style={{ fontSize: 13, color: MC_BODY }}>{totalModules} Module{totalModules > 1 ? 's' : ''}</span>
+            </div>
+          )}
+          {section.duration && (
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 4 }}>
+              {McIcon.clock16('#292952')}
+              <span style={{ fontSize: 13, color: MC_BODY }}>{section.duration}</span>
+            </div>
+          )}
+          {levelStyle && (
+            <span style={{
+              padding:'2px 8px', borderRadius: 16,
+              fontSize: 11, fontWeight: 500,
+              background: levelStyle.bg, color: levelStyle.fg,
+              whiteSpace:'nowrap',
+            }}>{section.level}</span>
+          )}
+          {section.source && (
+            <span style={{ fontSize: 11, color: MC_MUTED }}>{section.source}</span>
+          )}
         </div>
 
-        <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+        {section.description && (
+          <p style={{ fontSize: 13, color:'#535862', margin: 0 }}>{section.description}</p>
+        )}
+
+        {/* Expanded modules */}
+        {!isExternal && isExpanded && section.courseModules && (
+          <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
+            {section.courseModules.map(mod => (
+              <McModuleCard
+                key={mod.id}
+                module={mod}
+                isExpanded={!!expandedModules[mod.id]}
+                onToggle={() => onToggleModule(mod.id)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function McModuleCard({ module, isExpanded, onToggle }) {
+  return (
+    <div style={{
+      borderRadius: 12, border:'1px solid #cfddf7', overflow:'hidden',
+      marginLeft: 12, background:'#f3f6fd',
+    }}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 8, padding:'12px 14px' }}>
+        <button onClick={onToggle} style={{
+          display:'flex', alignItems:'center', justifyContent:'space-between',
+          width:'100%', gap: 12, background:'transparent', border:'none',
+          cursor:'pointer', padding: 0, textAlign:'left',
+        }}>
           <span style={{
-            display:'inline-flex', alignItems:'center', gap: 4,
-            padding:'4px 10px', borderRadius: 999,
-            background: MC_PRIMARY_SOFT, color: MC_PRIMARY,
-            fontSize: 11.5, fontWeight: 600,
-          }}>{McIcon.clock(MC_PRIMARY)} {timeRemaining}</span>
-          <button style={{
-            flex: 1, height: 42, borderRadius: 10,
-            background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
-            fontFamily:'inherit', fontSize: 13.5, fontWeight: 600,
-            display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-          }}>Continue Learning {McIcon.arrow('#FFF')}</button>
+            fontSize: 13, fontWeight: 500, color:'#0A0D12',
+            flex: 1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+          }}>{module.title}</span>
+          {isExpanded ? McIcon.chevronUp(MC_MUTED, 14) : McIcon.chevronDown(MC_MUTED, 14)}
+        </button>
+
+        <div style={{ display:'flex', alignItems:'center', gap: 10, flexWrap:'wrap' }}>
+          <div style={{ display:'inline-flex', alignItems:'center', gap: 4 }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" stroke="#292952" strokeWidth="1.7" strokeLinejoin="round"/></svg>
+            <span style={{ fontSize: 11, color: MC_BODY }}>{module.activities.length} Activit{module.activities.length > 1 ? 'ies' : 'y'}</span>
+          </div>
+          <div style={{ display:'inline-flex', alignItems:'center', gap: 4 }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#414651" strokeWidth="1.7"/><polyline points="12 6 12 12 16 14" stroke="#414651" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <span style={{ fontSize: 11, color: MC_BODY }}>{module.duration}</span>
+          </div>
         </div>
+
+        {isExpanded && (
+          <div style={{ display:'flex', flexDirection:'column', gap: 8 }}>
+            {module.activities.map(act => <McActivityCard key={act.id} activity={act}/>)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function McActivityCard({ activity }) {
+  const cfg = MC_ACTIVITY_CONFIG[activity.type] || { color: MC_PRIMARY, bg: MC_PRIMARY_SOFT, label: 'Learning Activity' };
+  const iconForType = (type, c) => {
+    switch (type) {
+      case 'Reading Material':     return McIcon.bulb(c);
+      case 'Microlearning Video':  return McIcon.video(c);
+      case 'Microlearning Slides':
+      case 'Microlearning':        return McIcon.slides(c);
+      case 'Quiz':                 return McIcon.clipCheck(c);
+      case 'Live Session':         return McIcon.radio(c);
+      case 'Assignment':           return McIcon.file(c);
+      default:                     return McIcon.book(c);
+    }
+  };
+  return (
+    <div style={{
+      background:'#FFF', borderRadius: 8, border:`1px solid ${MC_LINE}`,
+      padding: 12, marginLeft: 12,
+    }}>
+      <div style={{ display:'flex', alignItems:'center', gap: 8, width:'100%' }}>
+        <div style={{
+          width: 32, height: 32, borderRadius: 6,
+          background: cfg.bg, flexShrink: 0,
+          display:'flex', alignItems:'center', justifyContent:'center',
+        }}>{iconForType(activity.type, cfg.color)}</div>
+        <div style={{ display:'flex', flexDirection:'column', gap: 2, flex: 1, minWidth: 0 }}>
+          <p style={{
+            fontSize: 13, fontWeight: 500, color:'#0A0D12', margin: 0,
+            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+          }}>{activity.title}</p>
+          <div style={{ display:'flex', alignItems:'center', gap: 6, flexWrap:'wrap' }}>
+            <span style={{
+              padding:'1px 6px', borderRadius: 12,
+              fontSize: 11, fontWeight: 500,
+              background:'#F5F5F5', color:'#6B7280',
+            }}>{cfg.label}</span>
+            <div style={{ display:'inline-flex', alignItems:'center', gap: 4 }}>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#414651" strokeWidth="1.7"/><polyline points="12 6 12 12 16 14" stroke="#414651" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <span style={{ fontSize: 11, color: MC_BODY }}>{activity.duration}</span>
+            </div>
+          </div>
+        </div>
+        <span style={{
+          height: 28, padding:'0 10px', borderRadius: 14,
+          display:'inline-flex', alignItems:'center',
+          fontSize: 11, color: MC_MUTED,
+        }}>Available</span>
       </div>
     </div>
   );
@@ -489,12 +1046,14 @@ function McUpskillHub() {
 function MyCourse() {
   const [tab, setTab] = React.useState('ongoing');
   const [selected, setSelected] = React.useState(null);
+  const [noticeOpen, setNoticeOpen] = React.useState(false);
 
   const openDetails = id => setSelected(id);
   const closeDetails = () => setSelected(null);
 
   return (
     <div style={{
+      position:'relative',
       width:'100%', height:'100%', background:'#F7F8FA',
       overflowY:'auto', WebkitOverflowScrolling:'touch',
       fontFamily:'"Poppins", -apple-system, system-ui, sans-serif',
@@ -506,7 +1065,7 @@ function MyCourse() {
       }}>
 
         {selected ? (
-          <McCourseDetails courseId={selected} onBack={closeDetails}/>
+          <McCourseDetails courseId={selected} onBack={closeDetails} onStartCourse={() => setNoticeOpen(true)}/>
         ) : (
           <div style={{
             background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12,
@@ -561,6 +1120,8 @@ function MyCourse() {
         )}
 
       </div>
+
+      {noticeOpen && <McNoticeModal onClose={() => setNoticeOpen(false)}/>}
     </div>
   );
 }
