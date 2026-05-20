@@ -2321,7 +2321,6 @@ function LmCourseOverview() {
     }}>
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
         <div style={{ fontSize: 14, fontWeight: 600, color: LM_INK, letterSpacing:'-0.01em' }}>Course Overview</div>
-        <span style={{ fontSize: 11.5, color: LM_PRIMARY, fontWeight: 500 }}>View all →</span>
       </div>
 
       {/* tabs */}
@@ -2824,9 +2823,10 @@ function ManagerDashboard({ onLogout }) {
 // ─── App ──────────────────────────────────────────────────
 function Dashboard({ onLogout }) {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [period, setPeriod] = React.useState('Week');
   const [tab, setTab] = React.useState('Dashboard');
   const [circleDmOpen, setCircleDmOpen] = React.useState(false);
+  const [continueIdx, setContinueIdx] = React.useState(0);
+  const continueScrollerRef = React.useRef(null);
 
   // Reset DM-open flag when switching away from Circle tab
   React.useEffect(() => {
@@ -2837,9 +2837,6 @@ function Dashboard({ onLogout }) {
   const accent = ACCENTS[tweaks.accent].hex;
   const dense = tweaks.density === 'compact';
   const isDark = tweaks.theme === 'dark';
-
-  const periodHours = { Week: '12', Month: '34', 'All time': '164' }[period];
-  const periodDelta = { Week: '+3 vs last week', Month: '+11 vs last month', 'All time': '+164 lifetime' }[period];
 
   if (tab === 'My Course') {
     return (
@@ -2859,7 +2856,7 @@ function Dashboard({ onLogout }) {
     );
   }
 
-  if (tab === 'Assessment') {
+  if (tab === 'Discover') {
     return (
       <div style={{ width:'100%', height:'100%', position:'relative', overflow:'hidden' }}>
         <AssessScreen/>
@@ -2922,9 +2919,181 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
 
+        {/* Continue Learning — primary action hero */}
+        <Card t={t} pad={dense ? 12 : 14}>
+          <div style={{ display:'flex', alignItems:'center', gap: 12, marginBottom: 12 }}>
+            <div style={{
+              width: 44, height: 44, borderRadius: 10, flexShrink: 0,
+              border: `1px solid ${t.line}`, background:'#FFF',
+              display:'flex', alignItems:'center', justifyContent:'center',
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize:16, fontWeight:650, letterSpacing:'-0.015em', color: t.ink }}>Continue Learning</div>
+              <div style={{ fontSize:12.5, color: t.muted, marginTop: 2 }}>Let’s continue the course</div>
+            </div>
+          </div>
+          {(() => {
+            const courses = [
+              { title:'Digital Marketing Essentials', pct: 45, mod: 4, total: 9, left:'1h 40m left',
+                img:'https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png' },
+              { title:'Data Analytics Foundations', pct: 72, mod: 7, total: 10, left:'42m left',
+                img:'https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png' },
+              { title:'Leadership for Managers', pct: 20, mod: 2, total: 8, left:'3h 10m left',
+                img:'https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png' },
+              { title:'UX Research Fundamentals', pct: 88, mod: 11, total: 12, left:'18m left',
+                img:'https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png' },
+            ];
+            return (
+              <>
+                <div
+                  ref={continueScrollerRef}
+                  onScroll={(e) => {
+                    const el = e.currentTarget;
+                    const slide = el.firstElementChild;
+                    if (!slide) return;
+                    const step = slide.getBoundingClientRect().width + 12; // gap
+                    const idx = Math.round(el.scrollLeft / step);
+                    if (idx !== continueIdx) setContinueIdx(idx);
+                  }}
+                  style={{
+                    display:'flex', gap: 12,
+                    overflowX:'auto', scrollSnapType:'x mandatory',
+                    marginRight: dense ? -12 : -14,
+                    paddingRight: dense ? 12 : 14,
+                    paddingBottom: 4,
+                    WebkitOverflowScrolling:'touch', scrollbarWidth:'none',
+                  }}
+                >
+                  {courses.map((c, i) => (
+                    <div key={i} style={{
+                      flex:'0 0 calc(100% - 24px)', scrollSnapAlign:'start',
+                      display:'flex', flexDirection:'column',
+                      background:'#FFF', border:`1px solid ${t.line}`, borderRadius: 12, padding: 12,
+                    }}>
+                      <div style={{ display:'flex', gap: 12, alignItems:'flex-start' }}>
+                        <div style={{
+                          width: 88, height: 88, borderRadius: 12, flexShrink: 0, overflow:'hidden',
+                          border: `1px solid ${t.line}`,
+                        }}>
+                          <img
+                            src={c.img}
+                            alt="Course cover"
+                            style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+                          />
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0, paddingTop: 2 }}>
+                          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:8 }}>
+                            <div style={{ fontSize:15, fontWeight:650, letterSpacing:'-0.015em', color: t.ink, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{c.title}</div>
+                            <div style={{ fontSize:13, color: t.ink, fontFamily:'"JetBrains Mono", ui-monospace', fontWeight:600, fontVariantNumeric:'tabular-nums' }}>{c.pct}%</div>
+                          </div>
+                          <div style={{ display:'flex', alignItems:'center', gap:6, marginTop: 6, fontSize:12, color: t.muted }}>
+                            <span>Module {c.mod} of {c.total}</span>
+                            {I.dot(t.faint)}
+                            <span>{c.left}</span>
+                          </div>
+                          <div style={{
+                            marginTop: 10, height: 6, borderRadius: 3, background: t.chip,
+                            overflow:'hidden', position:'relative',
+                          }}>
+                            <div style={{
+                              position:'absolute', inset:0, width:`${c.pct}%`,
+                              background: accent, borderRadius: 3,
+                            }}/>
+                          </div>
+                        </div>
+                      </div>
+                      <button style={{
+                        marginTop: 12, width:'100%', borderRadius: 10,
+                        padding:'10px 0',
+                        border:'none', background: accent, color:'#FFF',
+                        fontFamily:'inherit', fontWeight: 500, fontSize: 13.5,
+                        letterSpacing:'-0.005em', cursor:'pointer',
+                        display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+                      }}>
+                        Continue →
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display:'flex', justifyContent:'center', gap: 6, marginTop: 12 }}>
+                  {courses.map((_, i) => {
+                    const active = i === continueIdx;
+                    return (
+                      <button
+                        key={i}
+                        aria-label={`Go to slide ${i + 1}`}
+                        onClick={() => {
+                          const el = continueScrollerRef.current;
+                          if (!el) return;
+                          const slide = el.firstElementChild;
+                          if (!slide) return;
+                          const step = slide.getBoundingClientRect().width + 12;
+                          el.scrollTo({ left: step * i, behavior:'smooth' });
+                        }}
+                        style={{
+                          width: active ? 18 : 6, height: 6, borderRadius: 3,
+                          border:'none', padding: 0, cursor:'pointer',
+                          background: active ? accent : t.line,
+                          transition:'width 180ms ease, background 180ms ease',
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })()}
+        </Card>
+
+        {/* KPI strip — 3 even tiles with icon */}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 10 }}>
+          {[
+            { k:'9 / 12', l:'Courses', sub:'completed', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
+              </svg>
+            )},
+            { k:'82%',    l:'Avg quiz', sub:'last 30 days', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            )},
+            { k:'Normal', l:'Velocity', sub:'on track', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 7h6v6"/>
+                <path d="m22 7-8.5 8.5-5-5L2 17"/>
+              </svg>
+            )},
+          ].map((kpi, i) => (
+            <Card t={t} pad={12} key={i} style={{ display:'flex', flexDirection:'column' }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: 10,
+                background: kpi.tileBg, border: `1px solid ${kpi.tileBorder}`,
+                display:'flex', alignItems:'center', justifyContent:'center',
+                marginBottom: 10,
+              }}>{kpi.icon(kpi.iconColor)}</div>
+              <div style={{
+                fontSize: kpi.k === 'Normal' ? 17 : 22,
+                fontWeight: 550, letterSpacing:'-0.025em', color: t.ink,
+                fontVariantNumeric:'tabular-nums', lineHeight: 1.1,
+                marginTop: kpi.k === 'Normal' ? 3 : 0,
+              }}>{kpi.k}</div>
+              <div style={{ fontSize:11.5, color: t.ink2, fontWeight:500, marginTop: 4 }}>{kpi.l}</div>
+              <div style={{ fontSize:10.5, color: t.faint, fontWeight: 400 }}>{kpi.sub}</div>
+            </Card>
+          ))}
+        </div>
+
         {/* Achievement Badges — outperforming hero */}
         <div style={{
-          background:'linear-gradient(135deg, #194185 0%, #1570EF 55%, #1570EF 100%)',
+          background:'linear-gradient(145.29deg, #194185 0%, #1570EF 38.9%, #1570EF 70.72%)',
           borderRadius: 12, position:'relative', overflow:'hidden',
           padding: 16, boxShadow:'0 2px 8px rgba(16,24,40,0.06)',
           color:'#FFF',
@@ -2986,143 +3155,35 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
 
-        {/* Continue Learning — primary action hero */}
-        <Card t={t} pad={dense ? 12 : 14}>
-          <div style={{ marginBottom: 10 }}>
-            <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em' }}>Continue learning</div>
-          </div>
-          <div style={{ display:'flex', gap: 12, alignItems:'flex-start' }}>
-            <div style={{
-              width: 64, height: 64, borderRadius: 10, flexShrink: 0, overflow:'hidden',
-              border: `1px solid ${t.line}`,
-            }}>
-              <img
-                src="https://api-ajari-develop.ajari.app/v1/lx-upload/fetch/temp/1774942022561689.png"
-                alt="Course cover"
-                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
-              />
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:8 }}>
-                <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Digital Marketing Essentials</div>
-                <div style={{ fontSize:12, color: t.ink, fontFamily:'"JetBrains Mono", ui-monospace', fontWeight:500, fontVariantNumeric:'tabular-nums' }}>45%</div>
-              </div>
-              <div style={{ display:'flex', alignItems:'center', gap:6, marginTop: 3, fontSize:11, color: t.muted }}>
-                <span>Module 4 of 9</span>
-                {I.dot(t.faint)}
-                <span>1h 40m left</span>
-              </div>
-              <div style={{
-                marginTop: 8, height: 5, borderRadius: 3, background: t.chip,
-                overflow:'hidden', position:'relative',
-              }}>
-                <div style={{
-                  position:'absolute', inset:0, width:'45%',
-                  background: accent, borderRadius: 3,
-                }}/>
-              </div>
-            </div>
-          </div>
-          <button style={{
-            marginTop: 12, width:'100%', height: 40, borderRadius: 10,
-            border:'none', background: accent, color:'#FFF',
-            fontFamily:'inherit', fontWeight: 550, fontSize: 13.5,
-            letterSpacing:'-0.005em', cursor:'pointer',
-            display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-          }}>
-            Continue
-            {I.arrow('#FFF')}
-          </button>
-          <div style={{ display:'flex', justifyContent:'center', marginTop: 10 }}>
-            <span style={{ fontSize:11.5, color: accent, fontWeight:500 }}>View all →</span>
-          </div>
-        </Card>
-
-        {/* KPI strip — 3 even tiles with icon */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 10 }}>
-          {[
-            { k:'9 / 12', l:'Courses', sub:'completed', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
-              </svg>
-            )},
-            { k:'82%',    l:'Avg quiz', sub:'last 30 days', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-            )},
-            { k:'Normal', l:'Velocity', sub:'on track', tileBg:'#EFF8FF', tileBorder:'#B2DDFF', iconColor:'#1570EF', icon: (c) => (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 7h6v6"/>
-                <path d="m22 7-8.5 8.5-5-5L2 17"/>
-              </svg>
-            )},
-          ].map((kpi, i) => (
-            <Card t={t} pad={12} key={i} style={{ display:'flex', flexDirection:'column' }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: 10,
-                background: kpi.tileBg, border: `1px solid ${kpi.tileBorder}`,
-                display:'flex', alignItems:'center', justifyContent:'center',
-                marginBottom: 10,
-              }}>{kpi.icon(kpi.iconColor)}</div>
-              <div style={{
-                fontSize: kpi.k === 'Normal' ? 17 : 22,
-                fontWeight: 550, letterSpacing:'-0.025em', color: t.ink,
-                fontVariantNumeric:'tabular-nums', lineHeight: 1.1,
-                marginTop: kpi.k === 'Normal' ? 3 : 0,
-              }}>{kpi.k}</div>
-              <div style={{ fontSize:11.5, color: t.ink2, fontWeight:500, marginTop: 4 }}>{kpi.l}</div>
-              <div style={{ fontSize:10.5, color: t.faint, fontFamily:'"JetBrains Mono", ui-monospace' }}>{kpi.sub}</div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Learning hours — secondary, full card below stats */}
+        {/* Learning hours — 3-column summary */}
         <Card t={t} pad={dense ? 14 : 18}>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom: 12 }}>
-            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
-              <div style={{
-                width: 32, height: 32, borderRadius: 8,
-                background: '#EFF8FF', border: '1px solid #B2DDFF',
-                display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
-              }}>
-                {I.clock(accent)}
-              </div>
-              <div>
-                <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
-                <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Time invested · {period.toLowerCase()}</div>
-              </div>
-            </div>
+          <div style={{ display:'flex', alignItems:'center', gap: 10, marginBottom: 14 }}>
             <div style={{
-              display:'inline-flex', alignItems:'center', gap:3,
-              fontSize:12, fontFamily:'"JetBrains Mono", ui-monospace', color: t.success,
-              fontVariantNumeric:'tabular-nums',
+              width: 32, height: 32, borderRadius: 8,
+              background: '#EFF8FF', border: '1px solid #B2DDFF',
+              display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
             }}>
-              {I.arrow(t.success)}
-              <span>{periodDelta}</span>
+              {I.clock(accent)}
+            </div>
+            <div>
+              <div style={{ fontSize:14, fontWeight:550, letterSpacing:'-0.015em', color: t.ink }}>Learning hours</div>
+              <div style={{ fontSize:12, color: t.muted, marginTop: 2 }}>Hours spent learning per week this quarter</div>
             </div>
           </div>
-          <div style={{ display:'flex', alignItems:'baseline', gap: 6 }}>
-            <div style={{
-              fontFamily:'"Poppins", system-ui', fontWeight:500, fontSize:46,
-              letterSpacing:'-0.04em', color: t.ink, lineHeight:1,
-              fontVariantNumeric:'tabular-nums',
-            }}>{periodHours}</div>
-            <div style={{ fontSize:18, color: t.muted, fontWeight:400, letterSpacing:'-0.02em' }}>hrs</div>
-          </div>
-          {/* Mini distribution bar */}
-          <div style={{ display:'flex', height: 4, borderRadius: 2, overflow:'hidden', marginTop: 14, gap: 2 }}>
-            {[40,28,22,10].map((w,i) => (
-              <div key={i} style={{
-                width:`${w}%`,
-                background: i === 0 ? accent : i === 1 ? `color-mix(in oklch, ${accent} 50%, transparent)`
-                          : i === 2 ? `color-mix(in oklch, ${accent} 25%, transparent)` : t.chip,
-              }}/>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            {[
+              { label:'This Week',  value:'12'   },
+              { label:'This Month', value:'34h'  },
+              { label:'Total',      value:'164h' },
+            ].map((col, i) => (
+              <div key={i} style={{ display:'flex', flexDirection:'column', gap: 6 }}>
+                <div style={{ fontSize:14, color: t.muted, fontWeight: 400 }}>{col.label}</div>
+                <div style={{
+                  fontSize:32, fontWeight:550, letterSpacing:'-0.04em',
+                  color: t.ink, lineHeight: 1, fontVariantNumeric:'tabular-nums',
+                }}>{col.value}</div>
+              </div>
             ))}
-          </div>
-          <div style={{ display:'flex', justifyContent:'space-between', marginTop: 8, fontSize: 10.5, color: t.faint, fontFamily:'"JetBrains Mono", ui-monospace' }}>
-            <span>Video 40%</span><span>Reading 28%</span><span>Quiz 22%</span><span>Other</span>
           </div>
         </Card>
 
@@ -3194,16 +3255,6 @@ function Dashboard({ onLogout }) {
                 <div style={{ fontSize:11.5, color: t.muted, marginTop: 2 }}>Avg score · last 6 courses</div>
               </div>
             </div>
-            <div style={{
-              display:'inline-flex', alignItems:'center', gap:4,
-              padding:'4px 8px', borderRadius: 999,
-              background: ACCENTS[tweaks.accent].soft,
-              fontSize:11, fontFamily:'"JetBrains Mono", ui-monospace', color: accent,
-              fontWeight:500, fontVariantNumeric:'tabular-nums',
-            }}>
-              {I.arrow(accent)}
-              <span>+15 pts</span>
-            </div>
           </div>
           <PerfChart t={t} accent={accent}/>
         </Card>
@@ -3236,7 +3287,7 @@ function DashboardTabBar({ tab, setTab, t, accent, tweaks, isDark }) {
           { k:'My Course', icon: I.book },
           { k:'Circle',    icon: I.circle },
           { k:'Journey',   icon: I.path },
-          { k:'Assessment', icon: I.compass },
+          { k:'Discover', icon: I.compass },
         ].map(it => {
           const active = it.k === tab;
           return (
