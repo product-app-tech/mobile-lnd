@@ -25,13 +25,22 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <!-- Mock data (load first; no React/state deps) -->
   <script type="text/babel" src="data/trainee-circle.data.js"></script>
+  <script type="text/babel" src="data/trainee-mycourse.data.js"></script>
+  <script type="text/babel" src="data/trainee-journey.data.js"></script>
+  <script type="text/babel" src="data/trainee-assess.data.js"></script>
+  <script type="text/babel" src="data/trainee-profile.data.js"></script>
+  <script type="text/babel" src="data/lm-dashboard.data.js"></script>
   <!-- Shared frame/UI -->
   <script type="text/babel" src="ios-frame.jsx"></script>
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script type="text/babel" src="login.jsx"></script>
   <!-- Screens (depend on data + React globals) -->
-  <script type="text/babel" src="mycourse.jsx"></script>
+  <script type="text/babel" src="screens/mycourse.jsx"></script>
+  <script type="text/babel" src="screens/journey.jsx"></script>
+  <script type="text/babel" src="screens/assess.jsx"></script>
   <script type="text/babel" src="screens/circle.jsx"></script>
+  <script type="text/babel" src="screens/profile.jsx"></script>
+  <script type="text/babel" src="screens/lm-dashboard.jsx"></script>
   <!-- App entry (depends on everything above) -->
   <script type="text/babel" src="app.jsx"></script>
 </body>

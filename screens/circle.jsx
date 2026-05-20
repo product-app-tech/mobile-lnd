@@ -1135,43 +1135,27 @@ function CrCallScreen({ onBack }) {
       paddingTop: 60,
       overflowY:'auto',
     }}>
-      <div style={{ padding:'8px 18px 0' }}>
-        <button onClick={onBack} aria-label="Back" style={{
-          width: 32, height: 32, borderRadius: 8,
-          background:'transparent', border:'none', cursor:'pointer',
-          display:'inline-flex', alignItems:'center', justifyContent:'center', padding: 0,
-        }}>
-          <CrIcArrowLeft c={CR_INK}/>
-        </button>
-      </div>
-
-      <div style={{ padding:'8px 18px 24px' }}>
-        {/* Title + New call */}
-        <div style={{
-          display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap: 12,
-          marginBottom: 18,
-        }}>
-          <div style={{ minWidth: 0 }}>
-            <div style={{
-              fontSize: 22, fontWeight: 700, color: CR_INK,
-              lineHeight:'28px', letterSpacing:'-0.02em',
-            }}>Calls</div>
-            <div style={{ fontSize: 12.5, color: CR_MUTED, marginTop: 2 }}>
-              Your recent call history
-            </div>
-          </div>
+      <CrSubScreenHeader
+        onBack={onBack}
+        gradient="linear-gradient(135deg, #1570EF, #6366F1)"
+        icon={<CrIcPhone c="#FFF"/>}
+        title="Calls"
+        subtitle="Your recent call history"
+        action={
           <button style={{
             display:'inline-flex', alignItems:'center', gap: 6,
-            padding:'9px 14px', borderRadius: 10,
+            padding:'8px 12px', borderRadius: 10,
             background: CR_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
-            fontFamily:'inherit', fontSize: 13, fontWeight: 600,
+            fontFamily:'inherit', fontSize: 12.5, fontWeight: 600,
             boxShadow:'0 2px 6px rgba(21,112,239,0.30)', flexShrink: 0,
           }}>
-            <CrIcPlus c="#FFF" s={16}/>
+            <CrIcPlus c="#FFF" s={14}/>
             <span>New call</span>
           </button>
-        </div>
+        }
+      />
 
+      <div style={{ padding:'16px 18px 24px' }}>
         {/* Section label */}
         <div style={{
           fontSize: 10.5, fontWeight: 700, letterSpacing:'0.16em',
