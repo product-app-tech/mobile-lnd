@@ -294,7 +294,7 @@ const JN_ASSIGNED = [{
   category: 'Professional Development',
   duration: '2 Weeks',
   totalModules: 6,
-  image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70',
+  gradient: 'linear-gradient(135deg, #6366F1 0%, #312E81 100%)',
 }];
 
 const JN_ONGOING = [{
@@ -305,7 +305,7 @@ const JN_ONGOING = [{
   totalModules: 10,
   progress: 45,
   completedModules: 4,
-  image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=70',
+  gradient: 'linear-gradient(135deg, #0684C0 0%, #2C5AA0 100%)',
 }];
 
 const JN_UPCOMING = [{
@@ -315,7 +315,7 @@ const JN_UPCOMING = [{
   duration: '3 Weeks',
   totalModules: 9,
   startDate: '01 Jun 2026',
-  image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=70',
+  gradient: 'linear-gradient(135deg, #0EA5E9 0%, #1E3A8A 100%)',
 }];
 
 const JN_COMPLETED = [{
@@ -326,23 +326,21 @@ const JN_COMPLETED = [{
   totalModules: 8,
   completedAt: '12 Apr 2026',
   certified: true,
-  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70',
+  gradient: 'linear-gradient(135deg, #10B981 0%, #064E3B 100%)',
 }];
 
 const JN_HUB_PROGRAMS = [
-  { id: 'jp-1', title: 'Professional Development & Certifications: Data Analytics', category: 'Professional Development', duration: '3 Weeks', totalModules: 12, image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70' },
-  { id: 'jp-2', title: 'Leadership Program: Marketing', category: 'Leadership', duration: '2 Weeks', totalModules: 8, image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=70' },
-  { id: 'jp-3', title: 'Cloud Architecture Specialist Track', category: 'Technical', duration: '5 Weeks', totalModules: 14, image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70' },
+  { id: 'jp-1', title: 'Professional Development & Certifications', category: 'Professional Dev', duration: '3 Weeks', totalModules: 12, gradient: 'linear-gradient(135deg, #4C6B95 0%, #1F3A6A 100%)' },
+  { id: 'jp-2', title: 'Leadership Program: Marketing', category: 'Leadership', duration: '2 Weeks', totalModules: 8, gradient: 'linear-gradient(135deg, #8B5CF6 0%, #4C1D95 100%)' },
+  { id: 'jp-3', title: 'Cloud Architecture Specialist Track', category: 'Technical', duration: '5 Weeks', totalModules: 14, gradient: 'linear-gradient(135deg, #06B6D4 0%, #164E63 100%)' },
 ];
-
-const JN_SUMMARY = { totalJourneys: 4, completed: 1, inProgress: 1, certificates: 1, hoursThisMonth: 18, overallRate: 38 };
 
 const JN_TABS = [
   { key: 'assigned',  label: 'Assigned' },
   { key: 'journey',   label: 'Journey' },
-  { key: 'ongoing',   label: 'Ongoing Journey' },
-  { key: 'upcoming',  label: 'Upcoming Journey' },
-  { key: 'completed', label: 'Completed Journey' },
+  { key: 'ongoing',   label: 'Ongoing' },
+  { key: 'upcoming',  label: 'Upcoming' },
+  { key: 'completed', label: 'Completed' },
 ];
 
 const JN_JOURNEY_ALL = JN_ASSIGNED.concat(JN_ONGOING, JN_UPCOMING, JN_COMPLETED);
@@ -364,15 +362,6 @@ function JnIcCompass({ c = JN_PRIMARY }) {
     </svg>
   );
 }
-function JnIcTarget({ c = JN_PRIMARY }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9" stroke={c} strokeWidth="1.6"/>
-      <circle cx="12" cy="12" r="5" stroke={c} strokeWidth="1.6"/>
-      <circle cx="12" cy="12" r="1.5" fill={c}/>
-    </svg>
-  );
-}
 function JnIcAward({ c = JN_SUCCESS }) {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -389,30 +378,6 @@ function JnIcClock({ c = JN_MUTED }) {
     </svg>
   );
 }
-function JnIcLayers({ c = JN_PRIMARY }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-      <path d="m12 2 9 5-9 5-9-5 9-5Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-      <path d="m3 12 9 5 9-5M3 17l9 5 9-5" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function JnIcRocket({ c = '#d97706' }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-      <path d="M14 14s-2 4-6 4 0-6 0-6M4 14c2-7 7-11 14-11 0 7-4 12-11 14L4 14Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-      <circle cx="14" cy="9" r="1.5" stroke={c} strokeWidth="1.6"/>
-    </svg>
-  );
-}
-function JnIcTrophy({ c = '#ea580c' }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-      <path d="M6 4h12v4a6 6 0 0 1-12 0V4Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-      <path d="M6 6H3v2a3 3 0 0 0 3 3M18 6h3v2a3 3 0 0 1-3 3M12 14v4M9 22h6" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
-    </svg>
-  );
-}
 function JnIcArrow({ c = '#FFF' }) {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -420,31 +385,6 @@ function JnIcArrow({ c = '#FFF' }) {
     </svg>
   );
 }
-function JnIcEye({ c = JN_PRIMARY }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke={c} strokeWidth="1.6"/>
-      <circle cx="12" cy="12" r="3" stroke={c} strokeWidth="1.6"/>
-    </svg>
-  );
-}
-function JnIcMore({ c = JN_BODY }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <circle cx="6" cy="12" r="1.5" fill={c}/>
-      <circle cx="12" cy="12" r="1.5" fill={c}/>
-      <circle cx="18" cy="12" r="1.5" fill={c}/>
-    </svg>
-  );
-}
-function JnIcExternal({ c = JN_PRIMARY }) {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-      <path d="M14 4h6v6M20 4l-9 9M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
 function JnSectionHeader({ icon, title, subtitle }) {
   return (
     <div style={{ display:'flex', alignItems:'flex-start', gap: 10, marginBottom: 12 }}>
@@ -466,21 +406,6 @@ function JnInfoRow({ label, value }) {
     <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 10 }}>
       <span style={{ fontSize: 12.5, color: JN_MUTED }}>{label}</span>
       <span style={{ fontSize: 12.5, color: JN_INK, fontWeight: 500, textAlign:'right' }}>{value}</span>
-    </div>
-  );
-}
-
-function JnStatTile({ icon, iconBg, label, value }) {
-  return (
-    <div style={{ display:'flex', alignItems:'center', gap: 8 }}>
-      <div style={{
-        width: 30, height: 30, borderRadius: 8, background: iconBg,
-        display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
-      }}>{icon}</div>
-      <div style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ fontSize: 17, fontWeight: 600, color: JN_INK, lineHeight:'20px', letterSpacing:'-0.01em' }}>{value}</div>
-        <div style={{ fontSize: 10.5, color: JN_MUTED, lineHeight:'13px' }}>{label}</div>
-      </div>
     </div>
   );
 }
@@ -522,9 +447,10 @@ function JnProgramCard({ program, footer, badge }) {
       borderRadius: 12, overflow:'hidden',
       display:'flex', flexDirection:'column',
     }}>
-      <div style={{ position:'relative', width:'100%', aspectRatio:'16 / 9', background:'#F5F5F5' }}>
-        <img src={program.image} alt={program.title}
-          style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
+      <div style={{
+        position:'relative', width:'100%', height: 175,
+        background: program.gradient || 'linear-gradient(135deg, #0684C0 0%, #2C5AA0 100%)',
+      }}>
         <div style={{
           position:'absolute', top:0, left:0, right:0, bottom:0,
           background:'linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.15) 55%, transparent)',
@@ -537,8 +463,8 @@ function JnProgramCard({ program, footer, badge }) {
         {badge}
       </div>
       <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 10 }}>
-        <div style={{ display:'flex', flexDirection:'column', gap: 6, paddingBottom: 8, borderBottom:'1px solid rgba(0,0,0,0.05)' }}>
-          <JnInfoRow label="Modules" value={program.totalModules + ' Courses'}/>
+        <div style={{ display:'flex', flexDirection:'column', gap: 4 }}>
+          <JnInfoRow label="Modules" value={program.totalModules + ' Modules'}/>
           <JnInfoRow label="Duration" value={program.duration}/>
           <JnInfoRow label="Category" value={program.category}/>
         </div>
@@ -566,8 +492,8 @@ function JnAssignedFooter() {
 function JnOngoingFooter({ program }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
-      <div>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 6 }}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 4 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
           <span style={{ fontSize: 11.5, color: JN_MUTED }}>
             {program.completedModules}/{program.totalModules} modules complete
           </span>
@@ -586,7 +512,7 @@ function JnOngoingFooter({ program }) {
         fontFamily:'inherit', fontSize: 13.5, fontWeight: 600,
         display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
       }}>
-        <span>Resume Journey</span><JnIcArrow c={JN_PRIMARY}/>
+        <span>Resume Journey →</span>
       </button>
     </div>
   );
@@ -705,51 +631,18 @@ function JnJourneyList({ tab }) {
   );
 }
 
-function JnCompletionRate() {
-  return (
-    <div style={{
-      background:'#FFF', border:'1px solid ' + JN_LINE, borderRadius: 12, padding: 16,
-      display:'flex', flexDirection:'column', gap: 16,
-    }}>
-      <JnSectionHeader icon={<JnIcTarget c={JN_PRIMARY}/>} title="Journey Completion Rate" subtitle="Your overall journey progress"/>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 10 }}>
-        <JnStatTile icon={<JnIcLayers c={JN_PRIMARY}/>}  iconBg='rgba(16,86,217,0.10)' label="Total"        value={JN_SUMMARY.totalJourneys}/>
-        <JnStatTile icon={<JnIcAward c="#16a34a"/>}      iconBg='#ECFDF3'              label="Completed"    value={JN_SUMMARY.completed}/>
-        <JnStatTile icon={<JnIcRocket c="#d97706"/>}     iconBg='#FFFBEB'              label="In Progress"  value={JN_SUMMARY.inProgress}/>
-        <JnStatTile icon={<JnIcTrophy c="#ea580c"/>}     iconBg='#FFF7ED'              label="Certificates" value={JN_SUMMARY.certificates}/>
-      </div>
-      <div style={{
-        display:'flex', alignItems:'center', gap: 8,
-        background:'#f8f9fb', borderRadius: 10, padding:'10px 12px',
-      }}>
-        <JnIcClock c={JN_MUTED}/>
-        <span style={{ fontSize: 12.5, color: JN_BODY }}>
-          <span style={{ fontWeight: 600 }}>{JN_SUMMARY.hoursThisMonth}h</span> journey learning this month
-        </span>
-      </div>
-    </div>
-  );
-}
-
 function JnJourneyHub() {
   return (
     <div style={{
       background:'#FFF', border:'1px solid ' + JN_LINE, borderRadius: 12, padding: 16,
       display:'flex', flexDirection:'column', gap: 12,
+      boxShadow:'0px 2px 8px 0px rgba(16,24,40,0.06)',
     }}>
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap: 10 }}>
-        <JnSectionHeader icon={<JnIcCompass c={JN_PRIMARY}/>} title="Journey Hub" subtitle="Explore development programs and certifications."/>
-        <button style={{
-          background:'transparent', border:'none', cursor:'pointer',
-          color: JN_PRIMARY, fontFamily:'inherit', fontSize: 12.5, fontWeight: 600,
-          display:'inline-flex', alignItems:'center', gap: 4, padding: 0, marginTop: 6,
-        }}>
-          <span>Open Hub</span><JnIcExternal c={JN_PRIMARY}/>
-        </button>
-      </div>
+      <JnSectionHeader icon={<JnIcCompass c={JN_PRIMARY}/>} title="Journey Hub" subtitle="Discover more journey programs"/>
       <div style={{
         display:'flex', gap: 12, overflowX:'auto',
-        paddingBottom: 4,
+        paddingBottom: 4, marginLeft: 6, marginRight: 6, marginTop: 0, marginBottom: 0,
+        paddingLeft: 16, paddingRight: 16,
         scrollSnapType:'x mandatory',
         scrollbarWidth:'none', msOverflowStyle:'none',
       }}>
@@ -760,9 +653,10 @@ function JnJourneyHub() {
             border:'1px solid ' + JN_LINE, borderRadius: 12, overflow:'hidden',
             background:'#FFF', display:'flex', flexDirection:'column',
           }}>
-            <div style={{ position:'relative', width:'100%', aspectRatio:'16 / 9', background:'#F5F5F5' }}>
-              <img src={p.image} alt={p.title}
-                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
+            <div style={{
+              position:'relative', width:'100%', height: 146,
+              background: p.gradient,
+            }}>
               <div style={{
                 position:'absolute', top:0, left:0, right:0, bottom:0,
                 background:'linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.15) 55%, transparent)',
@@ -773,28 +667,20 @@ function JnJourneyHub() {
                 lineHeight:'18px',
               }}>{p.title}</div>
             </div>
-            <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 10 }}>
-              <div style={{ display:'flex', flexDirection:'column', gap: 6, paddingBottom: 8, borderBottom:'1px solid rgba(0,0,0,0.05)' }}>
-                <JnInfoRow label="Courses"  value={p.totalModules + ' Courses'}/>
+            <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
+              <div style={{ display:'flex', flexDirection:'column', gap: 4 }}>
+                <JnInfoRow label="Courses"  value={p.totalModules + ' Modules'}/>
                 <JnInfoRow label="Duration" value={p.duration}/>
                 <JnInfoRow label="Category" value={p.category}/>
               </div>
-              <div style={{ display:'flex', gap: 8 }}>
+              <div style={{ paddingTop: 6 }}>
                 <button style={{
-                  flex: 1, height: 40, borderRadius: 8,
+                  width:'100%', height: 40, borderRadius: 8,
                   background: JN_PRIMARY_SOFT, color: JN_PRIMARY, border:'none', cursor:'pointer',
-                  fontFamily:'inherit', fontSize: 13.5, fontWeight: 600,
+                  fontFamily:'inherit', fontSize: 12.5, fontWeight: 600,
                   display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
                 }}>
-                  <JnIcEye c={JN_PRIMARY}/>
                   <span>View Details</span>
-                </button>
-                <button style={{
-                  width: 40, height: 40, borderRadius: 8,
-                  background:'#F5F5F5', color: JN_BODY, border:'none', cursor:'pointer',
-                  display:'inline-flex', alignItems:'center', justifyContent:'center',
-                }}>
-                  <JnIcMore c={JN_BODY}/>
                 </button>
               </div>
             </div>
@@ -806,22 +692,22 @@ function JnJourneyHub() {
 }
 
 function JourneyScreen() {
-  const [tab, setTab] = React.useState('assigned');
+  const [tab, setTab] = React.useState('ongoing');
   return (
     <div style={{
       position:'absolute', top:0, left:0, right:0, bottom:0,
       background:'#F7F8FA',
-      paddingTop: 60, paddingBottom: 120,
+      paddingTop: 40, paddingBottom: 120,
       overflowY:'auto',
       fontFamily:'"Poppins", -apple-system, system-ui, sans-serif',
       letterSpacing:'-0.005em',
     }}>
       <div style={{ padding:'0 18px', display:'flex', flexDirection:'column', gap: 16 }}>
-        <div style={{ display:'flex', alignItems:'flex-start', gap: 10, marginTop: 4 }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 12 }}>
           <div style={{
             width: 40, height: 40, borderRadius: 10, background:'#FFF',
             border:'1px solid ' + JN_LINE,
-            display:'flex', alignItems:'center', justifyContent:'center',
+            display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
           }}>
             <JnIcRoute c={JN_PRIMARY}/>
           </div>
@@ -833,18 +719,18 @@ function JourneyScreen() {
             </div>
           </div>
         </div>
-        <JnCompletionRate/>
         <div style={{
           background:'#FFF', border:'1px solid ' + JN_LINE, borderRadius: 12, padding: 16,
           display:'flex', flexDirection:'column', gap: 14,
+          boxShadow:'0px 2px 8px 0px rgba(16,24,40,0.06)',
         }}>
           <JnSectionHeader icon={<JnIcRoute c={JN_PRIMARY}/>} title="My Journey" subtitle="Track your journey progress and upcoming schedules."/>
-          <div style={{ display:'flex', gap: 6, overflowX:'auto', paddingBottom: 2 }}>
+          <div style={{ display:'flex', gap: 6, overflowX:'auto', paddingBottom: 2, scrollbarWidth:'none', msOverflowStyle:'none' }}>
             {JN_TABS.map(it => {
               const active = it.key === tab;
               return (
                 <button key={it.key} onClick={() => setTab(it.key)} style={{
-                  flexShrink: 0, height: 32, padding:'2px 14px', borderRadius: 999,
+                  flexShrink: 0, height: 30, padding:'6px 14px', borderRadius: 999,
                   background: active ? JN_PRIMARY : '#FFF',
                   color: active ? '#FFF' : JN_BODY,
                   border: active ? 'none' : '1px solid ' + JN_LINE,
@@ -919,7 +805,7 @@ function AsIcDoc({ c = AS_PRIMARY }) {
 }
 function AsIcCalendar({ c = AS_MUTED }) {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
       <rect x="3" y="4" width="18" height="18" rx="2" stroke={c} strokeWidth="1.6"/>
       <path d="M3 10h18M8 2v4M16 2v4" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
     </svg>
@@ -952,9 +838,9 @@ function AsStatusBadge({ status }) {
   return (
     <span style={{
       display:'inline-flex', alignItems:'center',
-      padding:'2px 8px', borderRadius: 999,
+      padding:'4px 10px', borderRadius: 999,
       background: config.bg, color: config.fg,
-      fontSize: 10.5, fontWeight: 600, lineHeight:'14px',
+      fontSize: 12, fontWeight: 600, lineHeight:'16px',
     }}>{status}</span>
   );
 }
@@ -964,10 +850,10 @@ function AsTypeBadge({ type }) {
   return (
     <span style={{
       display:'inline-flex', alignItems:'center', gap: 4,
-      padding:'2px 8px', borderRadius: 6,
+      padding:'4px 10px', borderRadius: 6,
       background: isQuiz ? '#EFF8FF' : '#F4F3FF',
       color: isQuiz ? '#175CD3' : '#5925DC',
-      fontSize: 10.5, fontWeight: 600, lineHeight:'14px',
+      fontSize: 12, fontWeight: 600, lineHeight:'16px',
     }}>{type}</span>
   );
 }
@@ -997,47 +883,48 @@ function AsAssessmentItem({ item, onView }) {
   const isOverdue = item.status === 'Late';
   return (
     <div style={{
-      padding: 14, borderRadius: 12,
+      padding: 16, borderRadius: 12,
       background:'#FFF', border:'1px solid ' + AS_LINE,
       display:'flex', flexDirection:'column', gap: 10,
     }}>
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap: 10 }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{
-            fontSize: 13.5, fontWeight: 600, color: AS_INK, lineHeight:'18px',
-            letterSpacing:'-0.005em', marginBottom: 3,
-          }}>{item.assessmentName}</div>
-          <div style={{
-            fontSize: 11.5, color: AS_MUTED, lineHeight:'15px',
-            display:'-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient:'vertical', overflow:'hidden',
-          }}>{item.courseName}</div>
-        </div>
-        <AsTypeBadge type={item.assessmentType}/>
-      </div>
+      {/* 1. Title */}
+      <div style={{
+        fontSize: 15, fontWeight: 600, color: AS_INK, lineHeight:'20px',
+        letterSpacing:'-0.01em',
+      }}>{item.assessmentName}</div>
 
-      <div style={{ display:'flex', flexWrap:'wrap', gap: 10, alignItems:'center' }}>
-        <span style={{
-          display:'inline-flex', alignItems:'center', gap: 4,
-          fontSize: 11.5, color: isOverdue ? '#B42318' : AS_MUTED,
-          fontWeight: isOverdue ? 600 : 400,
-        }}>
-          <AsIcCalendar c={isOverdue ? '#B42318' : AS_MUTED}/>
-          <span>{item.deadline}</span>
-        </span>
+      {/* 2. Description (course) */}
+      <div style={{
+        fontSize: 13, color: AS_MUTED, lineHeight:'18px',
+      }}>{item.courseName}</div>
+
+      {/* 3. Labels row (type + status) */}
+      <div style={{ display:'flex', flexWrap:'wrap', gap: 8, alignItems:'center' }}>
+        <AsTypeBadge type={item.assessmentType}/>
         <AsStatusBadge status={item.status}/>
         {item.score != null ? (
           <span style={{
             marginLeft:'auto',
-            fontSize: 12, fontWeight: 600, color: AS_INK,
+            fontSize: 13, fontWeight: 600, color: AS_INK,
             fontVariantNumeric:'tabular-nums',
           }}>Score {item.score}</span>
         ) : null}
       </div>
 
+      {/* 4. Date row */}
+      <span style={{
+        display:'inline-flex', alignItems:'center', gap: 6,
+        fontSize: 13, color: isOverdue ? '#B42318' : AS_BODY,
+        fontWeight: isOverdue ? 600 : 500,
+      }}>
+        <AsIcCalendar c={isOverdue ? '#B42318' : AS_MUTED}/>
+        <span>{item.deadline}</span>
+      </span>
+
       <button onClick={() => onView(item.id)} style={{
-        height: 36, borderRadius: 8,
+        height: 40, borderRadius: 8, marginTop: 2,
         background: AS_PRIMARY_SOFT, color: AS_PRIMARY, border:'none', cursor:'pointer',
-        fontFamily:'inherit', fontSize: 12.5, fontWeight: 600,
+        fontFamily:'inherit', fontSize: 13.5, fontWeight: 600,
         display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
       }}>
         <span>View Detail</span>
@@ -1101,7 +988,7 @@ function AssessScreen() {
           </div>
           <div style={{ display:'flex', flexDirection:'column', gap: 2 }}>
             <div style={{ fontSize: 12.5, color: AS_FAINT, lineHeight:'16px' }}>Assessment</div>
-            <div style={{ fontSize: 20, fontWeight: 600, color: AS_INK, lineHeight:'24px', letterSpacing:'-0.015em' }}>
+            <div style={{ fontSize: 20, fontWeight: 600, lineHeight:'24px', letterSpacing:'-0.015em' }}>
               <span style={{ color: AS_MUTED }}>Track your </span>
               <span style={{ color: AS_PRIMARY }}>assessments.</span>
             </div>
@@ -1109,8 +996,11 @@ function AssessScreen() {
         </div>
 
         {/* Pending Assessments — metric summary */}
-        <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: AS_BODY }}>Pending Assessments</div>
+        <div style={{
+          background:'#FFF', border:'1px solid ' + AS_LINE, borderRadius: 12, padding: 14,
+          display:'flex', flexDirection:'column', gap: 12,
+        }}>
+          <div style={{ fontSize: 14, fontWeight: 600, color: AS_INK, lineHeight:'20px', letterSpacing:'-0.005em' }}>Pending Assessments</div>
           <div style={{ display:'flex', gap: 10 }}>
             <AsSummaryCard
               icon={<AsIcQuiz c={AS_PRIMARY}/>}
@@ -1133,10 +1023,20 @@ function AssessScreen() {
           display:'flex', flexDirection:'column', gap: 12,
         }}>
           {/* Header */}
-          <div style={{ display:'flex', flexDirection:'column', gap: 2 }}>
-            <div style={{ fontSize: 14.5, fontWeight: 600, color: AS_INK, lineHeight:'20px' }}>Assessment List</div>
-            <div style={{ fontSize: 11.5, color: AS_MUTED }}>
-              {filtered.length} of {base.length} assessments
+          <div style={{ display:'flex', alignItems:'flex-start', gap: 10 }}>
+            <div style={{
+              width: 38, height: 38, borderRadius: 10,
+              background: 'rgba(21,112,239,0.10)',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              flexShrink: 0,
+            }}>
+              <AsIcClipboard c={AS_PRIMARY}/>
+            </div>
+            <div style={{ display:'flex', flexDirection:'column', gap: 2 }}>
+              <div style={{ fontSize: 16, fontWeight: 600, color: AS_INK, lineHeight:'20px', letterSpacing:'-0.01em' }}>Assessment List</div>
+              <div style={{ fontSize: 12, color: AS_MUTED, lineHeight:'16px' }}>
+                Browse and complete your quizzes and assignments
+              </div>
             </div>
           </div>
 
@@ -1146,8 +1046,8 @@ function AssessScreen() {
             border:'1px solid rgba(21,112,239,0.10)',
           }}>
             {[
-              { k:'pending', label:'Pending' },
-              { k:'all',     label:'All Assessments' },
+              { k:'pending', label:'Pending',         count: AS_PENDING.length },
+              { k:'all',     label:'All Assessments', count: AS_ALL.length },
             ].map(it => {
               const active = it.k === activeTab;
               return (
@@ -1158,7 +1058,17 @@ function AssessScreen() {
                   fontFamily:'inherit', fontWeight: active ? 600 : 500,
                   fontSize: 12.5, cursor:'pointer',
                   boxShadow: active ? '0 1px 2px rgba(0,0,0,0.06)' : 'none',
-                }}>{it.label}</button>
+                  display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+                }}>
+                  <span>{it.label}</span>
+                  <span style={{
+                    display:'inline-flex', alignItems:'center', justifyContent:'center',
+                    minWidth: 20, height: 18, padding:'0 6px', borderRadius: 999,
+                    background: active ? AS_PRIMARY_SOFT : 'rgba(21,112,239,0.10)',
+                    color: AS_PRIMARY, fontSize: 11, fontWeight: 600, lineHeight: 1,
+                    fontVariantNumeric:'tabular-nums',
+                  }}>{it.count}</span>
+                </button>
               );
             })}
           </div>
@@ -1203,596 +1113,6 @@ function AssessScreen() {
                 <AsAssessmentItem key={item.id} item={item} onView={() => {}}/>
               ))}
             </div>
-          )}
-        </div>
-
-      </div>
-    </div>
-  );
-}
-
-// ─── Circle screen (inlined) ──────────────────────────────
-// Data adapted from ridho/lnd-presight-demo/src/pages/trainee/circle
-
-const CR_PRIMARY = '#1570EF';
-const CR_PRIMARY_SOFT = '#D1E9FF';
-const CR_INK = '#252B37';
-const CR_BODY = '#414651';
-const CR_MUTED = '#717680';
-const CR_FAINT = '#A4A7AE';
-const CR_LINE = '#E9EAEB';
-const CR_LINE2 = '#F5F5F5';
-const CR_DANGER = '#D92D20';
-
-const CR_AVATARS = {
-  michael: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?w=80&q=70',
-  robert:  'https://images.unsplash.com/photo-1758600587839-56ba05596c69?w=80&q=70',
-  group:   'https://images.unsplash.com/photo-1761250246894-ee2314939662?w=80&q=70',
-  citra:   'https://images.unsplash.com/photo-1689600944138-da3b150d9cb8?w=80&q=70',
-  andi:    'https://images.unsplash.com/photo-1752118464988-2914fb27d0f0?w=80&q=70',
-};
-
-const CR_CONTACTS = [
-  { id:'michael',     name:'Michael Torres',       avatarUrl: CR_AVATARS.michael, isOnline:true,  lastMessage:'Score kamu 88/100 — analisis stakeholder-nya sangat tajam! 🎉', time:'10:30 AM', unreadCount:1 },
-  { id:'robert',      name:'Robert Chen',          avatarUrl: CR_AVATARS.robert,  isOnline:false, lastMessage:'Teruslah semangat ya Pri! IDP kamu on-track, proud of you.', time:'9:45 AM' },
-  { id:'study-group', name:'Study Group Batch 3',  avatarUrl: CR_AVATARS.group,   isOnline:true, isGroup:true, lastMessage:'Citra: Meet virtual jam 8 malam ya untuk bahas capstone!', time:'9:00 AM', unreadCount:4 },
-  { id:'citra',       name:'Citra Lestari',        avatarUrl: CR_AVATARS.citra,   isOnline:true,  lastMessage:'Pri, share notes sesi 3 dong, kemarin aku ketinggalan beberapa poin', time:'8:30 AM' },
-  { id:'andi',        name:'Andi Pratama',         avatarUrl: CR_AVATARS.andi,    isOnline:false, lastMessage:'Bagian executive summary capstone project aku assign ke kamu ya', time:'Yesterday', unreadCount:1 },
-];
-
-const CR_CHANNELS = [
-  { id:'study-group-ch',    displayName:'Study Group — Batch 3',           section:'project', memberCount: 8,  imageUrl:'https://images.unsplash.com/photo-1765020553552-6286dde23660?w=80&q=70', unreadCount:6 },
-  { id:'capstone-project',  displayName:'Capstone Project — Team A',       section:'project', memberCount: 5,  imageUrl:'https://images.unsplash.com/photo-1758876203342-fc14c0bba67c?w=80&q=70', unreadCount:2 },
-  { id:'leadership-batch3', displayName:'Leadership Development — Batch 3', section:'course', memberCount: 24, imageUrl:'https://images.unsplash.com/photo-1765438863789-1396d28db24b?w=80&q=70', unreadCount:3 },
-  { id:'digital-bootcamp',  displayName:'Digital Skills Bootcamp — Feb 2026', section:'course', memberCount: 42, imageUrl:'https://images.unsplash.com/photo-1758691736067-b309ee3ef7b9?w=80&q=70' },
-];
-
-// DM messages mock (source: /Users/ridho/lnd-presight-demo/.../data/trainee-circle.mock.ts)
-const CR_DM_MESSAGES = {
-  michael: [
-    { id: 'm1', content: 'Pak Michael, saya mau tanya soal assignment sesi 3 — sudah saya submit tadi pagi.', time: '8:00 AM', isSent: true,  status: 'read' },
-    { id: 'm2', content: 'Ada satu bagian di analisis stakeholder yang saya masih kurang yakin, terutama tentang cara mengidentifikasi hidden stakeholder.', time: '8:01 AM', isSent: true, status: 'read' },
-    { id: 'm3', content: 'Score kamu 88/100 — analisis stakeholder-nya sangat tajam. Well done Priya! 🎉', time: '8:30 AM', isSent: false },
-    { id: 'm4', content: 'Wah, terima kasih banyak Pak Michael! Senang sekali dengarnya 😊', time: '9:00 AM', isSent: true, status: 'read' },
-    { id: 'm5', content: 'Pak Michael, boleh tanya soal case study sesi 4? Ada bagian tentang conflict resolution yang masih belum saya pahami.', time: '10:22 AM', isSent: true, status: 'delivered' },
-    { id: 'm6', content: 'Score kamu 88/100 — analisis stakeholder-nya sangat tajam! 🎉', time: '10:30 AM', isSent: false },
-  ],
-  robert: [
-    { id: 'r1', content: 'Selamat pagi Pak Robert! Ini update progress training saya minggu ini.', time: '9:00 AM', isSent: true, status: 'read' },
-    { id: 'r2', content: 'Sesi 3 Leadership sudah selesai, nilai assignment 88/100.', time: '9:01 AM', isSent: true, status: 'read' },
-    { id: 'r3', content: 'Minggu depan mulai sesi Conflict Resolution.', time: '9:02 AM', isSent: true, status: 'read' },
-    { id: 'r4', content: 'Teruslah semangat ya Pri! IDP kamu on-track banget, proud of you.', time: '9:45 AM', isSent: false },
-  ],
-  'study-group': [
-    { id: 'sg1', content: 'Teman-teman, gimana kalau kita bikin jadwal study session mingguan?', time: '8:00 AM', isSent: true, status: 'read' },
-    { id: 'sg2', content: 'Setuju! Kamis aja lebih enak, setelah sesi hari itu masih fresh materinya.', time: '8:30 AM', isSent: false },
-    { id: 'sg3', content: 'Citra: Meet virtual jam 8 malam ya untuk bahas capstone! Topic: pembagian tugas executive summary.', time: '9:00 AM', isSent: false },
-  ],
-  citra: [
-    { id: 'c1', content: 'Pri, share notes sesi 3 dong, kemarin aku ketinggalan beberapa poin pas Pak Michael bahas leadership shadow.', time: '8:30 AM', isSent: false },
-    { id: 'c2', content: 'Boleh banget Cit! Aku kirim notes-nya nanti malam ya 😊', time: '8:32 AM', isSent: true, status: 'read' },
-  ],
-  andi: [
-    { id: 'a1', content: 'Pri, untuk capstone project, bagian executive summary aku assign ke kamu ya. Deadline minggu depan.', time: 'Yesterday', isSent: false },
-    { id: 'a2', content: 'Siap Pak Andi, akan saya kerjakan!', time: 'Yesterday', isSent: true, status: 'read' },
-  ],
-};
-
-function CrIcChat({ c = CR_PRIMARY, s = 20 }) {
-  return (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
-      <path d="M21 12a8 8 0 0 1-12.36 6.74L3 20l1.26-5.64A8 8 0 1 1 21 12Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function CrIcSearch({ c = CR_MUTED }) {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-      <circle cx="11" cy="11" r="7" stroke={c} strokeWidth="1.6"/>
-      <path d="m20 20-3.5-3.5" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function CrIcHash({ c = CR_MUTED, s = 14 }) {
-  return (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
-      <path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function CrIcEdit({ c = '#FFF' }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function CrAvatar({ src, name, size = 44, online }) {
-  return (
-    <div style={{ position:'relative', width: size, height: size, flexShrink: 0 }}>
-      <img src={src} alt={name}
-        style={{
-          width:'100%', height:'100%', borderRadius:'50%',
-          objectFit:'cover', display:'block',
-          background: CR_LINE2,
-        }}/>
-      {online ? (
-        <span style={{
-          position:'absolute', right: 0, bottom: 0,
-          width: 11, height: 11, borderRadius:'50%',
-          background:'#12B76A', border:'2px solid #FFF',
-        }}/>
-      ) : null}
-    </div>
-  );
-}
-
-function CrUnreadDot({ count }) {
-  return (
-    <span style={{
-      minWidth: 18, height: 18, padding:'0 5px', borderRadius: 999,
-      background: CR_PRIMARY, color:'#FFF',
-      fontSize: 10.5, fontWeight: 600,
-      display:'inline-flex', alignItems:'center', justifyContent:'center',
-      fontVariantNumeric:'tabular-nums',
-    }}>{count}</span>
-  );
-}
-
-function CrContactRow({ c, onOpen }) {
-  return (
-    <button onClick={() => onOpen(c.id)} style={{
-      width:'100%', background:'transparent', border:'none', cursor:'pointer',
-      padding:'10px 4px', textAlign:'left',
-      display:'flex', alignItems:'center', gap: 12,
-      borderBottom:'1px solid ' + CR_LINE2,
-      fontFamily:'inherit',
-    }}>
-      <CrAvatar src={c.avatarUrl} name={c.name} online={c.isOnline}/>
-      <div style={{ flex: 1, minWidth: 0, display:'flex', flexDirection:'column', gap: 2 }}>
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 8 }}>
-          <span style={{
-            fontSize: 13.5, fontWeight: 600, color: CR_INK,
-            letterSpacing:'-0.005em',
-            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-          }}>{c.name}</span>
-          <span style={{ fontSize: 10.5, color: CR_FAINT, flexShrink: 0, fontVariantNumeric:'tabular-nums' }}>{c.time}</span>
-        </div>
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 8 }}>
-          <span style={{
-            flex: 1, fontSize: 12, color: c.unreadCount ? CR_BODY : CR_MUTED,
-            fontWeight: c.unreadCount ? 500 : 400,
-            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-          }}>{c.lastMessage}</span>
-          {c.unreadCount ? <CrUnreadDot count={c.unreadCount}/> : null}
-        </div>
-      </div>
-    </button>
-  );
-}
-
-function CrChannelRow({ ch, onOpen }) {
-  return (
-    <button onClick={() => onOpen(ch.id)} style={{
-      width:'100%', background:'transparent', border:'none', cursor:'pointer',
-      padding:'10px 4px', textAlign:'left',
-      display:'flex', alignItems:'center', gap: 12,
-      borderBottom:'1px solid ' + CR_LINE2,
-      fontFamily:'inherit',
-    }}>
-      <div style={{
-        width: 44, height: 44, borderRadius: 10, overflow:'hidden',
-        background: CR_LINE2, flexShrink: 0, position:'relative',
-      }}>
-        <img src={ch.imageUrl} alt={ch.displayName}
-          style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
-        <span style={{
-          position:'absolute', left: 4, bottom: 4,
-          width: 16, height: 16, borderRadius: 4,
-          background:'rgba(0,0,0,0.55)',
-          display:'inline-flex', alignItems:'center', justifyContent:'center',
-        }}>
-          <CrIcHash c="#FFF" s={10}/>
-        </span>
-      </div>
-      <div style={{ flex: 1, minWidth: 0, display:'flex', flexDirection:'column', gap: 2 }}>
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 8 }}>
-          <span style={{
-            fontSize: 13.5, fontWeight: 600, color: CR_INK,
-            letterSpacing:'-0.005em',
-            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-          }}>{ch.displayName}</span>
-          {ch.unreadCount ? <CrUnreadDot count={ch.unreadCount}/> : null}
-        </div>
-        <div style={{ display:'flex', alignItems:'center', gap: 6, fontSize: 11, color: CR_MUTED }}>
-          <span style={{
-            padding:'1px 6px', borderRadius: 6,
-            background: ch.section === 'course' ? '#EFF8FF' : '#F4F3FF',
-            color: ch.section === 'course' ? '#175CD3' : '#5925DC',
-            fontWeight: 600, fontSize: 10,
-          }}>{ch.section.toUpperCase()}</span>
-          <span>{ch.memberCount} members</span>
-        </div>
-      </div>
-    </button>
-  );
-}
-
-// ─── DM icons ─────────────────────────────────────────────
-function CrIcArrowLeft({ c = CR_INK }) {
-  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M19 12H5M11 18l-6-6 6-6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>;
-}
-function CrIcPhone({ c = CR_FAINT }) {
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>;
-}
-function CrIcVideo({ c = CR_FAINT }) {
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <polygon points="23 7 16 12 23 17 23 7" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/>
-    <rect x="1" y="5" width="15" height="14" rx="2" stroke={c} strokeWidth="1.7"/>
-  </svg>;
-}
-function CrIcMore({ c = CR_FAINT }) {
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <circle cx="5"  cy="12" r="1.5" fill={c}/>
-    <circle cx="12" cy="12" r="1.5" fill={c}/>
-    <circle cx="19" cy="12" r="1.5" fill={c}/>
-  </svg>;
-}
-function CrIcPaperclip({ c = CR_FAINT }) {
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>;
-}
-function CrIcSend({ c = '#FFF' }) {
-  return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-    <line x1="22" y1="2" x2="11" y2="13" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <polygon points="22 2 15 22 11 13 2 9 22 2" stroke={c} strokeWidth="2" strokeLinejoin="round"/>
-  </svg>;
-}
-function CrIcCheck({ c = '#9CA3AF', double }) {
-  if (double) {
-    return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-      <polyline points="18 6 7 17 2 12" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="22 10 13.5 18.5" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>;
-  }
-  return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-    <polyline points="20 6 9 17 4 12" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>;
-}
-
-function CrMessageStatus({ status }) {
-  if (!status) return null;
-  if (status === 'read')      return <CrIcCheck c="#BFDBFE" double/>;
-  if (status === 'delivered') return <CrIcCheck c="#D1D5DB" double/>;
-  return <CrIcCheck c="#D1D5DB"/>;
-}
-
-function CrMessageBubble({ message }) {
-  if (message.isSent) {
-    return (
-      <div style={{ display:'flex', justifyContent:'flex-end', marginBottom: 10 }}>
-        <div style={{ maxWidth:'78%' }}>
-          <div style={{
-            background:'linear-gradient(135deg, #3B82F6, #4F46E5)',
-            color:'#FFF', borderRadius: 16, borderBottomRightRadius: 6,
-            padding:'10px 14px',
-            boxShadow:'0 4px 12px rgba(59,130,246,0.20)',
-          }}>
-            <p style={{ margin: 0, fontSize: 13.5, lineHeight:'19px' }}>{message.content}</p>
-          </div>
-          {(message.time || message.status) && (
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', gap: 4, marginTop: 4, paddingRight: 4 }}>
-              <CrMessageStatus status={message.status}/>
-              {message.time && <span style={{ fontSize: 11, color:'#9CA3AF' }}>{message.time}</span>}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div style={{ display:'flex', justifyContent:'flex-start', marginBottom: 10 }}>
-      <div style={{ maxWidth:'78%' }}>
-        <div style={{
-          background:'#F3F4F6', color:'#1F2937',
-          borderRadius: 16, borderBottomLeftRadius: 6,
-          padding:'10px 14px',
-        }}>
-          <p style={{ margin: 0, fontSize: 13.5, lineHeight:'19px' }}>{message.content}</p>
-        </div>
-        {message.time && (
-          <div style={{ display:'flex', alignItems:'center', gap: 4, marginTop: 4, paddingLeft: 4 }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="#9CA3AF" strokeWidth="1.7"/>
-              <polyline points="12 6 12 12 16 14" stroke="#9CA3AF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span style={{ fontSize: 11, color:'#9CA3AF' }}>{message.time}</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function CrDmView({ contact, onBack }) {
-  const messages = CR_DM_MESSAGES[contact.id] || [];
-  const [input, setInput] = React.useState('');
-  const scrollRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages.length]);
-
-  return (
-    <div style={{
-      position:'absolute', top:0, left:0, right:0, bottom: 0,
-      background:'#FFF',
-      display:'flex', flexDirection:'column',
-      fontFamily:'"Poppins", -apple-system, system-ui, sans-serif',
-      letterSpacing:'-0.005em',
-      paddingTop: 60,
-    }}>
-      {/* Header */}
-      <div style={{
-        padding:'12px 16px', borderBottom:'1px solid #F3F4F6',
-        display:'flex', alignItems:'center', gap: 12,
-        background:'rgba(255,255,255,0.95)', flexShrink: 0,
-      }}>
-        <button onClick={onBack} aria-label="Back" style={{
-          width: 32, height: 32, borderRadius: 8,
-          background:'transparent', border:'none', cursor:'pointer',
-          display:'inline-flex', alignItems:'center', justifyContent:'center', padding: 0,
-        }}>
-          <CrIcArrowLeft c={CR_INK}/>
-        </button>
-
-        <div style={{ position:'relative', flexShrink: 0 }}>
-          <div style={{
-            width: 40, height: 40, borderRadius: 999, overflow:'hidden',
-            boxShadow:'0 0 0 2px #DBEAFE, 0 0 0 3px #FFF',
-          }}>
-            <img src={contact.avatarUrl} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
-          </div>
-          {contact.isOnline && (
-            <span style={{
-              position:'absolute', bottom: 0, right: 0,
-              width: 11, height: 11, borderRadius: 999,
-              background:'#00C073', border:'2px solid #FFF',
-            }}/>
-          )}
-        </div>
-
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{
-            fontSize: 14.5, fontWeight: 700, color:'#0F172A',
-            overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-            letterSpacing:'-0.01em',
-          }}>{contact.name}</div>
-          <div style={{
-            fontSize: 11.5, fontWeight: 600,
-            color: contact.isOnline ? '#00C073' : '#9CA3AF',
-          }}>{contact.isOnline ? 'Active now' : 'Offline'}</div>
-        </div>
-
-        <div style={{ display:'flex', alignItems:'center', gap: 2, flexShrink: 0 }}>
-          <button aria-label="Call" style={{
-            width: 32, height: 32, borderRadius: 10,
-            background:'transparent', border:'none', cursor:'pointer',
-            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
-          }}><CrIcPhone/></button>
-          <button aria-label="Video" style={{
-            width: 32, height: 32, borderRadius: 10,
-            background:'transparent', border:'none', cursor:'pointer',
-            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
-          }}><CrIcVideo/></button>
-          <button aria-label="More" style={{
-            width: 32, height: 32, borderRadius: 10,
-            background:'transparent', border:'none', cursor:'pointer',
-            display:'inline-flex', alignItems:'center', justifyContent:'center', color: CR_FAINT,
-          }}><CrIcMore/></button>
-        </div>
-      </div>
-
-      {/* Messages */}
-      <div ref={scrollRef} style={{
-        flex: 1, overflowY:'auto', minHeight: 0,
-        padding:'18px 16px',
-      }}>
-        {/* TODAY separator */}
-        <div style={{ display:'flex', alignItems:'center', gap: 10, margin:'8px 0 14px' }}>
-          <div style={{ flex: 1, height: 1, background:'#F3F4F6' }}/>
-          <span style={{
-            fontSize: 10.5, fontWeight: 700, color:'#9CA3AF',
-            textTransform:'uppercase', letterSpacing:'0.12em',
-          }}>Today</span>
-          <div style={{ flex: 1, height: 1, background:'#F3F4F6' }}/>
-        </div>
-        {messages.map(msg => <CrMessageBubble key={msg.id} message={msg}/>)}
-      </div>
-
-      {/* Input bar */}
-      <div style={{
-        padding:'10px 14px 18px', borderTop:'1px solid #F3F4F6',
-        flexShrink: 0, background:'rgba(255,255,255,0.95)',
-      }}>
-        <div style={{
-          display:'flex', alignItems:'center', gap: 10,
-          background:'#FFF', border:'1px solid #E5E7EB', borderRadius: 18,
-          padding:'8px 12px',
-          boxShadow:'0 2px 8px rgba(0,0,0,0.04)',
-        }}>
-          <button aria-label="Attach" style={{
-            background:'transparent', border:'none', cursor:'pointer', padding: 0,
-            display:'inline-flex', alignItems:'center', color: CR_FAINT,
-          }}><CrIcPaperclip/></button>
-          <input
-            type="text"
-            placeholder={`Message ${contact.name}...`}
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            style={{
-              flex: 1, border:'none', outline:'none', background:'transparent',
-              fontFamily:'inherit', fontSize: 13, color:'#1F2937', minWidth: 0,
-            }}
-          />
-          <button
-            disabled={!input.trim()}
-            onClick={() => setInput('')}
-            style={{
-              width: 30, height: 30, borderRadius: 10, border:'none',
-              cursor: input.trim() ? 'pointer' : 'not-allowed',
-              display:'inline-flex', alignItems:'center', justifyContent:'center',
-              background: input.trim()
-                ? 'linear-gradient(135deg, #3B82F6, #4F46E5)'
-                : '#F3F4F6',
-              color: input.trim() ? '#FFF' : '#D1D5DB',
-              boxShadow: input.trim() ? '0 4px 10px rgba(59,130,246,0.25)' : 'none',
-              flexShrink: 0,
-            }}
-          ><CrIcSend c={input.trim() ? '#FFF' : '#D1D5DB'}/></button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CircleScreen({ onDmChange }) {
-  const [tab, setTab] = React.useState('dm');
-  const [search, setSearch] = React.useState('');
-  const [openContactId, setOpenContactId] = React.useState(null);
-
-  // Notify parent when DM is opened/closed so it can hide tab bar
-  React.useEffect(() => {
-    if (onDmChange) onDmChange(!!openContactId);
-  }, [openContactId, onDmChange]);
-
-  const openContact = openContactId
-    ? CR_CONTACTS.find(c => c.id === openContactId)
-    : null;
-
-  if (openContact) {
-    return <CrDmView contact={openContact} onBack={() => setOpenContactId(null)}/>;
-  }
-
-  const dms = CR_CONTACTS.filter(c =>
-    !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.lastMessage.toLowerCase().includes(search.toLowerCase())
-  );
-  const channels = CR_CHANNELS.filter(c =>
-    !search || c.displayName.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const totalUnreadDM = CR_CONTACTS.reduce((s, c) => s + (c.unreadCount || 0), 0);
-  const totalUnreadCh = CR_CHANNELS.reduce((s, c) => s + (c.unreadCount || 0), 0);
-
-  return (
-    <div style={{
-      position:'absolute', top:0, left:0, right:0, bottom:0,
-      background:'#F7F8FA',
-      paddingTop: 60, paddingBottom: 120,
-      overflowY:'auto',
-      fontFamily:'"Poppins", -apple-system, system-ui, sans-serif',
-      letterSpacing:'-0.005em',
-    }}>
-      <div style={{ padding:'0 18px', display:'flex', flexDirection:'column', gap: 14 }}>
-
-        {/* Page title */}
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 10, marginTop: 4 }}>
-          <div style={{ display:'flex', alignItems:'flex-start', gap: 10 }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: 10, background:'#FFF',
-              border:'1px solid ' + CR_LINE,
-              display:'flex', alignItems:'center', justifyContent:'center',
-            }}>
-              <CrIcChat c={CR_PRIMARY}/>
-            </div>
-            <div style={{ display:'flex', flexDirection:'column', gap: 2 }}>
-              <div style={{ fontSize: 12.5, color: CR_FAINT, lineHeight:'16px' }}>Circle</div>
-              <div style={{ fontSize: 20, fontWeight: 600, color: CR_INK, lineHeight:'24px', letterSpacing:'-0.015em' }}>
-                <span style={{ color: CR_MUTED }}>Stay </span>
-                <span style={{ color: CR_PRIMARY }}>connected.</span>
-              </div>
-            </div>
-          </div>
-          <button style={{
-            width: 40, height: 40, borderRadius: 10,
-            background: CR_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
-            display:'inline-flex', alignItems:'center', justifyContent:'center',
-            boxShadow:'0 2px 6px rgba(21,112,239,0.30)',
-          }}>
-            <CrIcEdit c="#FFF"/>
-          </button>
-        </div>
-
-        {/* Search */}
-        <div style={{
-          height: 38, borderRadius: 10,
-          border:'1px solid ' + CR_LINE, background:'#FFF',
-          display:'flex', alignItems:'center', gap: 8, padding:'0 12px',
-        }}>
-          <CrIcSearch c={CR_MUTED}/>
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search messages..."
-            style={{
-              flex: 1, border:'none', outline:'none', background:'transparent',
-              fontFamily:'inherit', fontSize: 13, color: CR_INK,
-            }}/>
-        </div>
-
-        {/* Tabs */}
-        <div style={{
-          display:'flex', background:'rgba(21,112,239,0.06)', borderRadius: 10, padding: 3,
-          border:'1px solid rgba(21,112,239,0.10)',
-        }}>
-          {[
-            { k:'dm',      label:'Direct',   unread: totalUnreadDM },
-            { k:'channel', label:'Channels', unread: totalUnreadCh },
-          ].map(it => {
-            const active = it.k === tab;
-            return (
-              <button key={it.k} onClick={() => setTab(it.k)} style={{
-                flex: 1, height: 32, border:'none', borderRadius: 8,
-                background: active ? '#FFF' : 'transparent',
-                color: active ? CR_INK : CR_MUTED,
-                fontFamily:'inherit', fontWeight: active ? 600 : 500,
-                fontSize: 12.5, cursor:'pointer',
-                display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-                boxShadow: active ? '0 1px 2px rgba(0,0,0,0.06)' : 'none',
-              }}>
-                <span>{it.label}</span>
-                {it.unread > 0 ? (
-                  <span style={{
-                    minWidth: 16, height: 16, padding:'0 5px', borderRadius: 999,
-                    background: active ? CR_PRIMARY : CR_FAINT, color:'#FFF',
-                    fontSize: 10, fontWeight: 600,
-                    display:'inline-flex', alignItems:'center', justifyContent:'center',
-                  }}>{it.unread}</span>
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* List */}
-        <div style={{
-          background:'#FFF', border:'1px solid ' + CR_LINE, borderRadius: 12,
-          padding:'4px 12px',
-        }}>
-          {tab === 'dm' ? (
-            dms.length === 0
-              ? <div style={{ padding:'28px 0', textAlign:'center', fontSize: 13, color: CR_MUTED }}>No conversations found.</div>
-              : dms.map(c => <CrContactRow key={c.id} c={c} onOpen={() => setOpenContactId(c.id)}/>)
-          ) : (
-            channels.length === 0
-              ? <div style={{ padding:'28px 0', textAlign:'center', fontSize: 13, color: CR_MUTED }}>No channels found.</div>
-              : channels.map(ch => <CrChannelRow key={ch.id} ch={ch} onOpen={() => {}}/>)
           )}
         </div>
 
@@ -2856,7 +2176,7 @@ function Dashboard({ onLogout }) {
     );
   }
 
-  if (tab === 'Discover') {
+  if (tab === 'Assessment') {
     return (
       <div style={{ width:'100%', height:'100%', position:'relative', overflow:'hidden' }}>
         <AssessScreen/>
@@ -3287,21 +2607,25 @@ function DashboardTabBar({ tab, setTab, t, accent, tweaks, isDark }) {
           { k:'My Course', icon: I.book },
           { k:'Circle',    icon: I.circle },
           { k:'Journey',   icon: I.path },
-          { k:'Discover', icon: I.compass },
+          { k:'Assessment', icon: I.check2 },
         ].map(it => {
           const active = it.k === tab;
+          const ACTIVE_BLUE = '#1570EF';
+          const INACTIVE_GRAY = '#535862';
+          const color = active ? ACTIVE_BLUE : INACTIVE_GRAY;
           return (
             <button key={it.k} onClick={() => setTab(it.k)} style={{
-              display:'flex', flexDirection:'column', alignItems:'center', gap: 3,
+              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap: 4,
               background:'transparent', border:'none', cursor:'pointer',
               padding:'4px 0',
-              color: active ? accent : t.muted,
+              color,
             }}>
-              {it.icon(active ? accent : t.muted, active ? ACCENTS[tweaks.accent].soft : 'none')}
-              <span style={{ fontSize:10.5, fontWeight: active ? 550 : 450, letterSpacing:'-0.005em' }}>{it.k}</span>
+              {it.icon(color, 'none')}
+              <span style={{ fontSize:10.5, fontFamily:'inherit', fontWeight: active ? 600 : 500, letterSpacing:'-0.005em' }}>{it.k}</span>
               <span style={{
-                width: active ? 14 : 0, height: 2, borderRadius: 1, background: accent,
-                transition: 'width .2s', marginTop: -1,
+                width: 14, height: 2, borderRadius: 1,
+                background: active ? ACTIVE_BLUE : 'transparent',
+                transition: 'background .2s',
               }}/>
             </button>
           );

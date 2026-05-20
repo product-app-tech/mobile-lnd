@@ -323,49 +323,6 @@ function McEmptyState({ title, message }) {
   );
 }
 
-// ─── Completion-rate ring + stats ─────────────────────────────
-
-function McCompletionRate() {
-  return (
-    <div style={{
-      background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12, padding: 14,
-      display:'flex', flexDirection:'column', gap: 12,
-    }}>
-      <div style={{ width:'100%', display:'grid', gridTemplateColumns:'1fr 1fr', gap: 8 }}>
-        <McStat icon={McIcon.targetLg(MC_PRIMARY)} iconBg='rgba(16,86,217,0.10)' label="Total Skills" value={MC_SUMMARY.totalSkills}/>
-        <McStat icon={McIcon.awardLg('#16a34a')}   iconBg='#ECFDF3'              label="Achieved"    value={MC_SUMMARY.achieved}/>
-        <McStat icon={McIcon.bookLg('#d97706')}    iconBg='#FFFBEB'              label="In Progress" value={MC_SUMMARY.inProgress}/>
-        <McStat icon={McIcon.flameLg('#ea580c')}   iconBg='#FFF7ED'              label="Day Streak"  value={MC_SUMMARY.streakDays}/>
-      </div>
-
-      <div style={{
-        display:'flex', alignItems:'center', gap: 6,
-        borderTop:`1px solid ${MC_LINE}`, paddingTop: 10,
-      }}>
-        {McIcon.clock(MC_MUTED)}
-        <span style={{ fontSize: 12, color: MC_BODY }}>
-          <span style={{ fontWeight: 600 }}>{MC_SUMMARY.hoursMonth}h</span> learning this month
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function McStat({ icon, iconBg, label, value }) {
-  return (
-    <div style={{ display:'flex', alignItems:'center', gap: 8 }}>
-      <div style={{
-        width: 40, height: 40, borderRadius: 10, background: iconBg,
-        display:'flex', alignItems:'center', justifyContent:'center', flexShrink: 0,
-      }}>{icon}</div>
-      <div style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ fontSize: 17, fontWeight: 600, color: MC_INK, lineHeight:'20px', letterSpacing:'-0.01em' }}>{value}</div>
-        <div style={{ fontSize: 10.5, color: MC_MUTED, lineHeight:'13px' }}>{label}</div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Program Detail page (replaces inline McCourseDetails) ─────
 // Source: /Users/ridho/lnd-presight-demo/src/pages/trainee/journey/program-detail/components
 // Adapted for mobile 420px width — Figma frame ProgramDetail (node 9017:422)
@@ -992,9 +949,12 @@ function McActivityCard({ activity }) {
 // ─── Upskill Hub teaser ───────────────────────────────────────
 
 const MC_HUB_PICKS = [
-  { id:'h1', title:'Prompt Engineering for Marketers', tag:'AI · 1h 20m', image:'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=70' },
-  { id:'h2', title:'Effective Stakeholder Communication', tag:'Soft · 45m',  image:'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=70' },
-  { id:'h3', title:'Data Literacy 101', tag:'Data · 2h',             image:'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=70' },
+  { id:'h1', title:'Prompt Engineering for Marketers', tag:'AI · 1h 20m',
+    gradient:'linear-gradient(132.73deg, rgb(6, 78, 156) 0%, rgb(156, 66, 255) 73.21%)' },
+  { id:'h2', title:'Effective Stakeholder Communication', tag:'Soft · 45m',
+    gradient:'linear-gradient(132.73deg, rgb(229, 138, 82) 0%, rgb(184, 55, 106) 73.21%)' },
+  { id:'h3', title:'Data Literacy 101', tag:'Data · 2h',
+    gradient:'linear-gradient(132.73deg, rgb(16, 125, 156) 0%, rgb(18, 66, 106) 73.21%)' },
 ];
 
 function McUpskillHub() {
@@ -1023,10 +983,7 @@ function McUpskillHub() {
             border:`1px solid ${MC_LINE}`, borderRadius: 12, overflow:'hidden',
             scrollSnapAlign:'start', background:'#FFF',
           }}>
-            <div style={{ width:'100%', aspectRatio:'16 / 10', background:'#F5F5F5' }}>
-              <img src={p.image} alt="" onError={e => { e.currentTarget.style.display='none'; }}
-                style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
-            </div>
+            <div style={{ width:'100%', height: 125, background: p.gradient }}/>
             <div style={{ padding: 10, display:'flex', flexDirection:'column', gap: 4 }}>
               <div style={{
                 fontSize: 13, fontWeight: 600, color: MC_INK, lineHeight:'17px',
@@ -1084,9 +1041,6 @@ function MyCourse() {
                 <div style={{ fontSize: 12.5, color: MC_MUTED }}>Track your course progress and upcoming schedules.</div>
               </div>
             </div>
-
-            {/* Completion Rate — first */}
-            <McCompletionRate/>
 
             {/* Tabs — horizontal scroll */}
             <div style={{
