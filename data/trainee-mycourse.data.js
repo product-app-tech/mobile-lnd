@@ -16,44 +16,40 @@ const MC_ASSIGNED = [
 const MC_UPCOMING = [
   {
     id: 'up-1',
-    title: 'AI Ethics & Responsible AI Implementation',
-    level: 'Intermediate',
+    title: 'Digital Marketing Essentials',
+    level: 'Beginner',
+    duration: '1h 40 min',
     date: '16 Mar – 17 Mar 2026',
-    type: 'Blended Learning',
+    type: 'Self-Learning',
     source: 'LnD',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=70',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70',
   },
 ];
 
 const MC_COMPLETED = [
   {
     id: 'cm-1',
-    title: 'Foundations of Data Storytelling',
-    level: 'Intermediate', duration: '3h 20 min',
-    source: 'LinkedIn Learning',
+    title: 'Digital Marketing Essentials',
+    level: 'Beginner',
+    duration: '1h 40 min',
+    type: 'Self-Learning',
+    source: 'LnD',
     lessons: { done: 12, total: 12 },
     certified: true,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70',
-  },
-  {
-    id: 'cm-2',
-    title: 'Leadership Essentials for New Managers',
-    level: 'Beginner', duration: '2h 10 min',
-    source: 'O’Reilly',
-    lessons: { done: 9, total: 9 },
-    certified: true,
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=70',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70',
   },
 ];
 
 const MC_ONGOING = [
   {
     id: 'og-1',
-    title: 'Advanced React Patterns',
-    level: 'Advanced', duration: '4h 12 min',
+    title: 'Digital Marketing Essentials',
+    level: 'Beginner',
+    duration: '1h 40 min',
+    type: 'Self-Learning',
     source: 'LnD',
     progress: 62,
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=70',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70',
   },
 ];
 

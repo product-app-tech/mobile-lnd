@@ -60,6 +60,10 @@ const McIcon = {
   clipCheck:   (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="4" rx="1" stroke={c} strokeWidth="1.7"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" stroke={c} strokeWidth="1.7"/><path d="m9 14 2 2 4-4" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>),
   radio:       (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" stroke={c} strokeWidth="1.7"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.48M20.49 4a10 10 0 0 1 0 16M3.51 20a10 10 0 0 1 0-16" stroke={c} strokeWidth="1.7" strokeLinecap="round"/></svg>),
   file:        (c='currentColor') => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/><polyline points="14 2 14 8 20 8" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/></svg>),
+  // 14px building icon for the "Source: LnD" row
+  building14:  (c='currentColor') => (<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke={c} strokeWidth="1.6"/><line x1="9" y1="22" x2="9" y2="18" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><line x1="15" y1="22" x2="15" y2="18" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><line x1="8" y1="7" x2="10" y2="7" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><line x1="14" y1="7" x2="16" y2="7" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><line x1="8" y1="11" x2="10" y2="11" stroke={c} strokeWidth="1.6" strokeLinecap="round"/><line x1="14" y1="11" x2="16" y2="11" stroke={c} strokeWidth="1.6" strokeLinecap="round"/></svg>),
+  // 18px horizontal ellipsis (overflow button)
+  moreH:       (c='currentColor') => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="5"  cy="12" r="1.6" fill={c}/><circle cx="12" cy="12" r="1.6" fill={c}/><circle cx="19" cy="12" r="1.6" fill={c}/></svg>),
 };
 
 // ─── Reusable bits ────────────────────────────────────────────
@@ -108,6 +112,31 @@ function McSourceBadge({ source }) {
   );
 }
 
+function McTypeBadge({ type }) {
+  return (
+    <span style={{
+      display:'inline-flex', alignItems:'center',
+      padding:'4px 10px', borderRadius: 999,
+      background: MC_PRIMARY_SOFT, color: MC_PRIMARY,
+      fontSize: 11, fontWeight: 600, letterSpacing:'-0.005em',
+    }}>{type}</span>
+  );
+}
+
+function McInfoRow({ label, value, valueIcon }) {
+  return (
+    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+      <span style={{ fontSize: 12.5, color: MC_MUTED }}>{label}</span>
+      <span style={{
+        display:'inline-flex', alignItems:'center', gap: 6,
+        fontSize: 12.5, fontWeight: 500, color: MC_INK,
+      }}>
+        {valueIcon}{value}
+      </span>
+    </div>
+  );
+}
+
 function McCourseCard({ course, footer, badge }) {
   return (
     <div style={{
@@ -121,25 +150,37 @@ function McCourseCard({ course, footer, badge }) {
         <img src={course.image} alt={course.title}
           onError={e => { e.currentTarget.style.display='none'; }}
           style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+        <div style={{
+          position:'absolute', inset: 0,
+          background: 'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%)',
+        }}/>
         {badge && (
           <div style={{ position:'absolute', top: 10, left: 10 }}>{badge}</div>
         )}
-        {course.source && (
+        {course.type && (
           <div style={{ position:'absolute', top: 10, right: 10 }}>
-            <McSourceBadge source={course.source}/>
+            <McTypeBadge type={course.type}/>
           </div>
         )}
-      </div>
-      <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
         <div style={{
-          fontSize: 14, fontWeight: 600, color: MC_INK, lineHeight:'18px',
-          letterSpacing:'-0.01em', minHeight: 36,
+          position:'absolute', left: 14, right: 14, bottom: 12,
+          fontSize: 16, fontWeight: 700, color:'#FFF', lineHeight:'20px',
+          letterSpacing:'-0.01em',
+          textShadow:'0 1px 2px rgba(0,0,0,0.4)',
           display:'-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient:'vertical', overflow:'hidden',
         }}>{course.title}</div>
-        <McMetaRow items={[
-          { icon: McIcon.bars(MC_MUTED),  text: course.level },
-          { icon: McIcon.clock(MC_MUTED), text: course.duration || course.date },
-        ]}/>
+      </div>
+      <div style={{ padding: 14, display:'flex', flexDirection:'column', gap: 8 }}>
+        <McInfoRow label="Level" value={course.level}/>
+        {course.source && (
+          <McInfoRow label="Source" value={course.source}
+            valueIcon={McIcon.building14(MC_MUTED)}/>
+        )}
+        {course.lessons && (
+          <McInfoRow label="Lessons"
+            value={`${course.lessons.done}/${course.lessons.total} completed`}/>
+        )}
+        <McInfoRow label="Duration" value={course.duration || course.date}/>
         {footer}
       </div>
     </div>
@@ -163,18 +204,12 @@ function McCourseList({ tab, onDetails }) {
   if (tab === 'assigned') {
     return MC_ASSIGNED.map(c => (
       <McCourseCard key={c.id} course={c} footer={
-        <>
-          <McProgressBar value={0}/>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop: 2 }}>
-            <span style={{ fontSize: 11.5, color: MC_MUTED }}>Not started</span>
-          </div>
-          <button onClick={() => onDetails(c.id)} style={{
-            marginTop: 4, height: 36, borderRadius: 10,
-            background: MC_PRIMARY_SOFT, color: MC_PRIMARY, border:'none', cursor:'pointer',
-            fontFamily:'inherit', fontSize: 13, fontWeight: 600,
-            display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-          }}>Start Course {McIcon.arrow(MC_PRIMARY)}</button>
-        </>
+        <button onClick={() => onDetails(c.id)} style={{
+          marginTop: 4, width:'100%', height: 36, borderRadius: 10,
+          background: MC_PRIMARY_SOFT, color: MC_PRIMARY, border:'none', cursor:'pointer',
+          fontFamily:'inherit', fontSize: 13, fontWeight: 600,
+          display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+        }}>{McIcon.eye(MC_PRIMARY, 16)} View Details</button>
       }/>
     ));
   }
@@ -226,18 +261,12 @@ function McCourseList({ tab, onDetails }) {
         fontSize: 10.5, fontWeight: 600,
       }}>{McIcon.award(MC_SUCCESS)} Certified</span>
     )} footer={
-      <>
-        <McProgressBar value={100} accentFrom='#12B76A' accentTo='#039855' track='#ECFDF3'/>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop: 2 }}>
-          <span style={{ fontSize: 11.5, color: MC_MUTED }}>{c.lessons.done}/{c.lessons.total} lessons</span>
-        </div>
-        <button onClick={() => onDetails(c.id)} style={{
-          marginTop: 4, height: 36, borderRadius: 10,
-          background: MC_PRIMARY_SOFT, color: MC_PRIMARY, border:'none', cursor:'pointer',
-          fontFamily:'inherit', fontSize: 13, fontWeight: 600,
-          display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-        }}>View Certificate {McIcon.arrow(MC_PRIMARY)}</button>
-      </>
+      <button onClick={() => onDetails(c.id)} style={{
+        marginTop: 4, width:'100%', height: 36, borderRadius: 10,
+        background: MC_PRIMARY_SOFT, color: MC_PRIMARY, border:'none', cursor:'pointer',
+        fontFamily:'inherit', fontSize: 13, fontWeight: 600,
+        display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
+      }}>{McIcon.eye(MC_PRIMARY, 16)} View Details</button>
     }/>
   ));
 }
@@ -288,12 +317,13 @@ const MC_ACTIVITY_CONFIG = {
   'Assignment':            { color: '#DD6B20', bg: 'rgba(221,107,32,0.15)', label: 'Assignment' },
 };
 
-function McCourseDetails({ courseId, onBack, onStartCourse }) {
+function McCourseDetails({ courseId, onBack, onStartCourse, onEnroll }) {
   const course = [...MC_ASSIGNED, ...MC_UPCOMING, ...MC_ONGOING, ...MC_COMPLETED]
     .find(c => c.id === courseId) || MC_ASSIGNED[0];
 
   // Derive programStatus from which collection course belongs to
   let programStatus = 'Upcoming Program';
+  const isAssigned = !!MC_ASSIGNED.find(c => c.id === courseId);
   if (MC_ONGOING.find(c => c.id === courseId))         programStatus = 'In Progress';
   else if (MC_COMPLETED.find(c => c.id === courseId))  programStatus = 'Completed';
   else if (MC_UPCOMING.find(c => c.id === courseId))   programStatus = 'Upcoming Program';
@@ -433,13 +463,13 @@ function McCourseDetails({ courseId, onBack, onStartCourse }) {
       {/* Journey Program (overview: course sections with expandable modules+activities) */}
       <McProgramOverview sections={details.courseOverview}/>
 
-      {/* Start Course CTA */}
-      <button onClick={onStartCourse} style={{
+      {/* CTA — "Enroll Now" for assigned courses, "Start Course" otherwise */}
+      <button onClick={isAssigned ? onEnroll : onStartCourse} style={{
         marginTop: 4, height: 48, borderRadius: 10,
         background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
         fontFamily:'inherit', fontSize: 14, fontWeight: 600,
         display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 6,
-      }}>Start Course {McIcon.arrow('#FFF')}</button>
+      }}>{isAssigned ? 'Enroll Now' : 'Start Course'} {McIcon.arrow('#FFF')}</button>
     </div>
   );
 }
@@ -497,6 +527,82 @@ function McNoticeModal({ onClose }) {
           background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
           fontFamily:'inherit', fontSize: 14, fontWeight: 600,
         }}>Got it</button>
+      </div>
+    </div>
+  );
+}
+
+function McEnrollModal({ courseTitle, onCancel, onConfirm }) {
+  return (
+    <div
+      onClick={onCancel}
+      style={{
+        position:'absolute', inset: 0, zIndex: 1000,
+        background:'rgba(15,23,42,0.55)',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        padding: 24, fontFamily:'inherit',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position:'relative',
+          background:'#FFF', borderRadius: 16,
+          maxWidth: 340, width:'100%',
+          padding:'24px 20px 20px',
+          display:'flex', flexDirection:'column', alignItems:'center', gap: 12,
+          boxShadow:'0 24px 48px rgba(16,24,40,0.18), 0 4px 8px rgba(16,24,40,0.08)',
+        }}
+      >
+        {/* Close (×) */}
+        <button onClick={onCancel} aria-label="Close" style={{
+          position:'absolute', top: 12, right: 12,
+          width: 28, height: 28, borderRadius: 8,
+          background:'transparent', border:`1px solid ${MC_LINE}`, cursor:'pointer',
+          display:'inline-flex', alignItems:'center', justifyContent:'center',
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6l12 12M18 6 6 18" stroke={MC_BODY} strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
+        </button>
+
+        {/* Success check icon */}
+        <div style={{
+          width: 56, height: 56, borderRadius: 28,
+          background: MC_SUCCESS_SOFT,
+          display:'flex', alignItems:'center', justifyContent:'center',
+        }}>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke={MC_SUCCESS} strokeWidth="1.8"/>
+            <polyline points="8 12 11 15 16 9" stroke={MC_SUCCESS} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div style={{
+          fontSize: 17, fontWeight: 600, color: MC_INK,
+          textAlign:'center', letterSpacing:'-0.01em',
+        }}>Enroll Course?</div>
+
+        <p style={{
+          margin: 0,
+          fontSize: 13.5, color: MC_BODY,
+          textAlign:'center', lineHeight:'20px',
+        }}>
+          You're about to enroll in <strong style={{ color: MC_INK }}>"{courseTitle}"</strong>. You'll get access to all course materials and activities.
+        </p>
+
+        <div style={{ display:'flex', gap: 8, width:'100%', marginTop: 8 }}>
+          <button onClick={onCancel} style={{
+            flex: 1, height: 44, borderRadius: 10,
+            background:'#FFF', color: MC_BODY, border:`1px solid ${MC_LINE}`, cursor:'pointer',
+            fontFamily:'inherit', fontSize: 14, fontWeight: 600,
+          }}>Cancel</button>
+          <button onClick={onConfirm} style={{
+            flex: 1, height: 44, borderRadius: 10,
+            background: MC_PRIMARY, color:'#FFF', border:'none', cursor:'pointer',
+            fontFamily:'inherit', fontSize: 14, fontWeight: 600,
+          }}>Confirm Enroll</button>
+        </div>
       </div>
     </div>
   );
@@ -818,9 +924,14 @@ function MyCourse() {
   const [tab, setTab] = React.useState('ongoing');
   const [selected, setSelected] = React.useState(null);
   const [noticeOpen, setNoticeOpen] = React.useState(false);
+  const [enrollOpen, setEnrollOpen] = React.useState(false);
 
   const openDetails = id => setSelected(id);
   const closeDetails = () => setSelected(null);
+
+  const selectedCourse = selected
+    ? [...MC_ASSIGNED, ...MC_UPCOMING, ...MC_ONGOING, ...MC_COMPLETED].find(c => c.id === selected)
+    : null;
 
   return (
     <div style={{
@@ -836,7 +947,12 @@ function MyCourse() {
       }}>
 
         {selected ? (
-          <McCourseDetails courseId={selected} onBack={closeDetails} onStartCourse={() => setNoticeOpen(true)}/>
+          <McCourseDetails
+            courseId={selected}
+            onBack={closeDetails}
+            onStartCourse={() => setNoticeOpen(true)}
+            onEnroll={() => setEnrollOpen(true)}
+          />
         ) : (
           <div style={{
             background:'#FFF', border:`1px solid ${MC_LINE}`, borderRadius: 12,
@@ -890,6 +1006,13 @@ function MyCourse() {
       </div>
 
       {noticeOpen && <McNoticeModal onClose={() => setNoticeOpen(false)}/>}
+      {enrollOpen && selectedCourse && (
+        <McEnrollModal
+          courseTitle={selectedCourse.title}
+          onCancel={() => setEnrollOpen(false)}
+          onConfirm={() => setEnrollOpen(false)}
+        />
+      )}
     </div>
   );
 }

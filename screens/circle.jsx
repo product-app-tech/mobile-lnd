@@ -296,6 +296,27 @@ function CrIcPaperclip({ c = CR_FAINT }) {
     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>;
 }
+function CrIcImage({ c = '#FFF', s = 16 }) {
+  return <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="3" width="18" height="18" rx="2" stroke={c} strokeWidth="1.7"/>
+    <circle cx="9" cy="9" r="1.6" fill={c}/>
+    <path d="M21 16l-5-5-9 9" stroke={c} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>;
+}
+function CrIcDoc({ c = '#FFF', s = 16 }) {
+  return <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/>
+    <path d="M14 3v5h5" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/>
+    <line x1="9" y1="13" x2="15" y2="13" stroke={c} strokeWidth="1.7" strokeLinecap="round"/>
+    <line x1="9" y1="17" x2="13" y2="17" stroke={c} strokeWidth="1.7" strokeLinecap="round"/>
+  </svg>;
+}
+function CrIcCamera({ c = '#FFF', s = 16 }) {
+  return <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke={c} strokeWidth="1.7" strokeLinejoin="round"/>
+    <circle cx="12" cy="13" r="3.6" stroke={c} strokeWidth="1.7"/>
+  </svg>;
+}
 function CrIcSend({ c = '#FFF' }) {
   return <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
     <line x1="22" y1="2" x2="11" y2="13" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -371,11 +392,27 @@ function CrMessageBubble({ message }) {
 function CrDmView({ contact, onBack }) {
   const messages = CR_DM_MESSAGES[contact.id] || [];
   const [input, setInput] = React.useState('');
+  const [attachOpen, setAttachOpen] = React.useState(false);
   const scrollRef = React.useRef(null);
+  const attachRef = React.useRef(null);
 
   React.useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages.length]);
+
+  React.useEffect(() => {
+    if (!attachOpen) return;
+    const onDown = (e) => {
+      if (attachRef.current && !attachRef.current.contains(e.target)) setAttachOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [attachOpen]);
+
+  const handleAttach = (kind) => {
+    setAttachOpen(false);
+    console.log('Attach:', kind, 'to', contact.name);
+  };
 
   return (
     <div style={{
@@ -474,10 +511,58 @@ function CrDmView({ contact, onBack }) {
           padding:'8px 12px',
           boxShadow:'0 2px 8px rgba(0,0,0,0.04)',
         }}>
-          <button aria-label="Attach" style={{
-            background:'transparent', border:'none', cursor:'pointer', padding: 0,
-            display:'inline-flex', alignItems:'center', color: CR_FAINT,
-          }}><CrIcPaperclip/></button>
+          <div ref={attachRef} style={{ position:'relative', display:'inline-flex' }}>
+            <button
+              aria-label="Attach"
+              onClick={() => setAttachOpen(v => !v)}
+              style={{
+                background:'transparent', border:'none', cursor:'pointer', padding: 0,
+                display:'inline-flex', alignItems:'center',
+                color: attachOpen ? '#4F46E5' : CR_FAINT,
+              }}
+            ><CrIcPaperclip c={attachOpen ? '#4F46E5' : CR_FAINT}/></button>
+            {attachOpen && (
+              <div style={{
+                position:'absolute', bottom:'calc(100% + 8px)', left: -6,
+                minWidth: 220,
+                background:'rgba(250,250,252,0.92)',
+                backdropFilter:'saturate(180%) blur(20px)',
+                WebkitBackdropFilter:'saturate(180%) blur(20px)',
+                border:'1px solid rgba(0,0,0,0.06)',
+                borderRadius: 14,
+                boxShadow:'0 12px 32px rgba(0,0,0,0.16)',
+                padding: 4, display:'flex', flexDirection:'column',
+                zIndex: 10, overflow:'hidden',
+              }}>
+                {[
+                  { key:'photo', label:'Photo',    Icon: CrIcImage },
+                  { key:'doc',   label:'Document', Icon: CrIcDoc },
+                  { key:'cam',   label:'Camera',   Icon: CrIcCamera },
+                ].map(({ key, label, Icon }, i, arr) => (
+                  <React.Fragment key={key}>
+                    <button
+                      onClick={() => handleAttach(key)}
+                      style={{
+                        background:'transparent', border:'none', cursor:'pointer',
+                        padding:'11px 14px',
+                        display:'flex', alignItems:'center', justifyContent:'space-between', gap: 12,
+                        width:'100%',
+                      }}
+                    >
+                      <span style={{
+                        fontSize: 14.5, fontWeight: 400, color:'#000',
+                        letterSpacing:'-0.01em',
+                      }}>{label}</span>
+                      <Icon c="#007AFF" s={20}/>
+                    </button>
+                    {i < arr.length - 1 && (
+                      <div style={{ height: 1, background:'rgba(0,0,0,0.08)', marginLeft: 14 }}/>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
+          </div>
           <input
             type="text"
             placeholder={`Message ${contact.name}...`}
